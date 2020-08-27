@@ -1,10 +1,10 @@
 /******************************************************
-********              Hapy C64            *************
+********              Happy C64           *************
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.1.0                        *
-* Modification ... : 01/03/2020                       *
+* Version ........ : V 0.0.2.0                        *
+* Modification ... : 27/08/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -214,16 +214,13 @@
 	#define KEY_F3 5
 	#define KEY_F5 6
 	#define KEY_F7 3
-  
-  
-  
+   
   // ===============================
   // ** Les Fonctions Video       **
   // ===============================
   
-  
-  #define SCREEN_ON   POKE(53265L,PEEK(53265L)|16)
-  #define SCREEN_OFF  POKE(53265L,PEEK(53265L)&239)
+  #define SCREEN_ON   POKE(53265L,PEEK(53265L)|16)  // Allumage de l'écran
+  #define SCREEN_OFF  POKE(53265L,PEEK(53265L)&239) // Eteindre l'écran
   
   // --------------------------------------------------------
   // * set_adresse_screen_memory(screen_memory_id_pointeur) *
@@ -350,7 +347,7 @@
   // *draw_full_charset(position_x, position_y,id_charset, color_id)          *
   // --------------------------------------------------------------------------
   /*
-    - Permet d'afficher un charset à l'écran
+    - Permet d'afficher un charset à l'écran et la couleur de la case 
      # position_x : position horizontale du charset sur le quadrillage 8x8. (0-255)
      # position_x : position verticale du charset sur le quadrillage 8x8.(0-255)
      # id_charset : index du charset à poser. (0-255)
@@ -358,7 +355,28 @@
   */
   void draw_full_charset(unsigned char position_x, unsigned char position_y, unsigned char id_charset,unsigned char color_id);
   
+  
+  // ----------------------------------------------------------------------------------------------
+  // * draw_charset(unsigned char position_x, unsigned char position_y, unsigned char id_charset) *
+  // ----------------------------------------------------------------------------------------------
+  /*
+    - Permet d'afficher un charset à l'écran 
+     # position_x : position horizontale du charset sur le quadrillage 8x8. (0-255)
+     # position_x : position verticale du charset sur le quadrillage 8x8.(0-255)
+     # id_charset : index du charset à poser. (0-255)
+        
+  */ 
   void draw_charset(unsigned char position_x, unsigned char position_y, unsigned char id_charset);
+  
+  // --------------------------------------------------------------------------------------------
+  // * set_color_map(unsigned char position_x, unsigned char position_y,unsigned char color_id) *
+  // --------------------------------------------------------------------------------------------
+  /*
+    - Permet de modifier la color map à un emplacement !
+    # position_x : position horizontale du charset sur le quadrillage 8x8. (0-255)
+    # position_x : position verticale du charset sur le quadrillage 8x8.(0-255)
+    # color_id   : couleur du charset.    
+  */
   void set_color_map(unsigned char position_x, unsigned char position_y,unsigned char color_id);
   
   
@@ -394,7 +412,7 @@
   // --------------------------------------------------------------------------------------------
   // * set_sprite_data(unsigned char adr_cible,unsigned char *adr_data,unsigned char nb_sprite) *
   // --------------------------------------------------------------------------------------------
-  /* - Copy les datas d'un sprite (64octets) ou plusieurs à partir d'une adresse de départ (ou tableau)
+  /* - Copy les datas d'un sprite (6 4octets) ou plusieurs à partir d'une adresse de départ (ou tableau)
      # adr_cible : Adresse cible
      # *adr_data : adresse de départ. (Nom du tableau le plus souvent) 
      # nb_sprite : Nombre de sprite à copier.
@@ -435,7 +453,7 @@
   /* - modifie l'emplacement du sprite à l'écran
      # id_sprites : Numéros du sprite .  
      # position_x : placement X du sprite. (Le bit de controle est activé automatiquement si x >255)
-     #position_y  : placement y du sprite
+     # position_y  : placement y du sprite
   */
  void draw_sprite(unsigned char id_sprite,unsigned int position_x,unsigned char position_y);
  
@@ -496,8 +514,6 @@
  
   // ** Récupérer touche du clavier **
   #define get_keyboard_key() PEEK(203L)
- 
- 
  
   // ================================
   // ** Gestion de la mémoire      **
@@ -594,7 +610,7 @@
   // * WBL and Raster *
   // ==================
    unsigned int get_raster(void); // Récupére la ligne du raster
-   void wait_vbl(void);  // Attendre jusque l'entrée du Vblanck.
+   void wait_vbl(void);  // Attendre jusque l'entrée du retour du balayage.
   
   // ==============================================
   // * Générateur aléatoire de nombre sur 1 octet *
@@ -602,12 +618,16 @@
    unsigned char get_rnd(unsigned char nombre_max);
   
   
+  // ===================
+  // * Gestion Mémoire *
+  // ===================
+  
   // ---------------------------------------
   // * PEEK(addr)                          *
   // ---------------------------------------
   /* 
     - Permet de lire un octet à une adresse 
-     # addr : Adresse mémoire sur 2 octets (int )
+     # addr : Adresse mémoire sur 2 octets (int)
   */
  
   #define PEEK(addr)         (*(unsigned char*) (addr))
