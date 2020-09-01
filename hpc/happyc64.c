@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.2.0                        *
-* Modification ... : 27/08/2020                       *
+* Version ........ : V 0.0.3.0                        *
+* Modification ... : 1/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -17,6 +17,13 @@
 // ===============================
 unsigned int G_adr_tilemap = 1024l;
 
+// ====================
+// ** NTSC(0)/PAL(1) **
+// ====================
+unsigned char get_system()
+{
+  return PEEK(0x2A6);
+}
 
 // =======================================
 // ** Modifier la couleur de la bordure **
@@ -65,12 +72,16 @@ void set_color_background_2(unsigned char color_id)
 // =====================
 void cls(unsigned char id_tiles)
 {
-  unsigned int index;
+ 
+
+ 
+
+ unsigned int index;
   for (index = 0; index <1000; index++)
   {
     POKE(G_adr_tilemap+index,id_tiles);
   }
-  
+
   
 }
 
@@ -410,6 +421,10 @@ void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned cha
 
  }
   
+  
+  // ================================
+  // * Recuperer la ligne du raster *
+  // ================================
   unsigned int get_raster(void)
   {
     unsigned int raster;
@@ -418,6 +433,10 @@ void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned cha
     
   }
   
+  
+  // ===================
+  // * Attendre le VBL *
+  // ===================
   void wait_vbl(void)
   {
     while(get_raster()<252)
@@ -428,7 +447,9 @@ void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned cha
     
   }
   
-  
+  // ==============================================
+  // * Généré un nombre pseudo aléatoire du 8bits *
+  // ==============================================
   unsigned char get_rnd(unsigned char nombre_max)
   {
     unsigned char valeur_genere = 0;
@@ -441,7 +462,6 @@ void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned cha
      } while (valeur_genere > nombre_max);
      
      return valeur_genere;
-    
     
   }
  
