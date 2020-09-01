@@ -1,4 +1,10 @@
 ======================
+* Changement 0.0.3.1 *
+======================
+- Correction d'une erreur avec le choix de la couleur du paper
+- léger Amélioration de vitesse pour afficher un tile à l'écran 
+
+======================
 * Changement 0.0.3.0 *
 ======================
 Ajout de get_system() qui permet de tester si la machine est en PAL ou en NTSC
