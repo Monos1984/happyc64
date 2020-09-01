@@ -3,7 +3,7 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.3.0                        *
+* Version ........ : V 0.0.3.1                        *
 * Modification ... : 1/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
@@ -91,9 +91,11 @@ void cls(unsigned char id_tiles)
 
 void draw_full_charset(unsigned char position_x, unsigned char position_y, unsigned char id_charset, unsigned char color_id)
 {
+  unsigned int calcule_adresse;
+  calcule_adresse = (position_y<<5) + (position_y<<3)+position_x;
     
-		POKE(G_adr_tilemap+position_x+40*position_y,id_charset);
-    POKE(REG_COLOR_MAP+position_x+40*position_y,color_id);
+		POKE(G_adr_tilemap+calcule_adresse,id_charset);
+    POKE(REG_COLOR_MAP+calcule_adresse,color_id);
 }
 
 

@@ -3,7 +3,7 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.3.0                        *
+* Version ........ : V 0.0.3.1                        *
 * Modification ... : 01/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
@@ -67,7 +67,7 @@
   // *Gestion du screen memory *
   // ---------------------------
   /* Gestion du pointeur de la tilemap */
-  #define REG_SCREEN_MEMORY_PT  53272L  // Registre du pointeur du Screen Memory
+  
   #define SM_0                       0  // Adresse $0
   #define SM_0400                   16  // Adresse $0400 (par defaut)
   #define SM_0800                   32  // Adresse $0800
@@ -365,13 +365,13 @@
 
     
   // ---------------------------------------
-  // * set_color_paper(color_id)          *
+  // * set_color_background(color_id)          *
   // ---------------------------------------
   /*
     - Permet de modifier la couleur du papier du C64
      # color_id : index de la couleur du nuancier du C64.
   */
-  void set_color_paper (unsigned char color_id); 
+  void set_color_background (unsigned char color_id); 
   
   // ---------------------------------------
   // * set_color_background_1(color_id)          *
