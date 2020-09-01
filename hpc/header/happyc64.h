@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.2.0                        *
-* Modification ... : 27/08/2020                       *
+* Version ........ : V 0.0.3.0                        *
+* Modification ... : 01/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -15,6 +15,11 @@
   // ** Les Registres du Commodore 64 **
   // ===================================
   
+  // -------------------
+  // * Registre System *
+  // -------------------
+  #define NTSC 0
+  #define PAL  1
   
   // ----------------------
   // * Define du joystick *
@@ -222,6 +227,15 @@
   #define SCREEN_ON   POKE(53265L,PEEK(53265L)|16)  // Allumage de l'écran
   #define SCREEN_OFF  POKE(53265L,PEEK(53265L)&239) // Eteindre l'écran
   
+  // ----------------
+  // * get_system() *
+  // ----------------
+  /*
+    - Permet de system si le C64 est en mode pal(1) ou ntsc(1)
+  */
+  
+  unsigned char get_system();
+  
   // --------------------------------------------------------
   // * set_adresse_screen_memory(screen_memory_id_pointeur) *
   // --------------------------------------------------------
@@ -277,24 +291,59 @@
   void set_location_character(unsigned char id); 
   
   // -----------------------------------------------------
-  // * set_multi_color_mode() *
+  // * SET_MULTICOLOR_MODE_ON *
   // -----------------------------------------------------
   /*
     - Permet d'activer le mode multicolor pour les charsets.
     
   */
-  #define SET_MULTICOLOR_MODE    POKE(53270L,(PEEK(53270L)  | 16 )) 
+  #define SET_MULTICOLOR_MODE_ON    POKE(53270L,(PEEK(53270L)  | 16 )) 
   
-   // -----------------------------------------------------
-  // * set_standard_color_mode() *
+  // -----------------------------------------------------
+  // * SET_MULTICOLOR_MODE_OFF *
   // -----------------------------------------------------
   /*
     - Permet d'activer le mode standard pour les charsets.
     
   */
-  #define SET_STANDARD_COLOR_MODE  POKE(53270L,(PEEK(53270L)  & 239 )); 
+  #define SET_MULTICOLOR_MODE_OFF  POKE(53270L,(PEEK(53270L)  & 239 )); 
 
+  // -----------------------------------------------------
+  // * SET_EXTENDED_BACKGROUND_COLOR_ON *
+  // -----------------------------------------------------
+  /*
+    - Permet d'activer le mode  EXTENDED_BACKGROUND_COLOR..
+    
+  */
+  #define SET_EXTENDED_BACKGROUND_COLOR_ON  POKE(532650L,(PEEK(53265L)  |64 ));
   
+  // -----------------------------------------------------
+  // * SET_EXTENDED_BACKGROUND_COLOR_OFF *
+  // -----------------------------------------------------
+  /*
+    - Permet de desactiver mode EXTENDED_BACKGROUND_COLOR.
+    
+  */
+  #define SET_EXTENDED_BACKGROUND_COLOR_OFF  POKE(53265L,(PEEK(53265L)  & 191 )); 
+  
+  
+  // -----------------------------------------------------
+  // * SET_STANDARD_HIGHT_RESOLUTION_BMM_ON *
+  // -----------------------------------------------------
+  /*
+    - Permet d'activer le mode BIT MAP.
+    
+  */
+  #define SET_STANDARD_HIGHT_RESOLUTION_BMM_ON  POKE(532650L,(PEEK(53265L)  |32 ));
+  
+  // -----------------------------------------------------
+  // * SET_STANDARD_HIGHT_RESOLUTION_BMM_OFF *
+  // -----------------------------------------------------
+  /*
+    - Permet d'esactiver le mode BIT MAP.
+    
+  */
+  #define SET_STANDARD_HIGHT_RESOLUTION_BMM_OFF  POKE(53265L,(PEEK(53265L)  & 223 )); 
   
   // ---------------------------------------
   // * cls()                               *
