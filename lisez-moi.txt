@@ -1,0 +1,4 @@
+======================
+* Changement 0.0.3.0 *
+======================
+Ajout de get_system() qui permet de tester si la machine est en PAL ou en NTSC
