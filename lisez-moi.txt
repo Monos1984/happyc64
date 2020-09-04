@@ -1,4 +1,12 @@
 ======================
+* Changement 0.0.3.2 *
+======================
+- Correction d'une parenthèse dans la fonction set_interruption_on();
+- Wait VBL opérationel. (Ce n'étais pas le cas jusque la)
+- Les fonctions du fichier cbm.h sont accecible.
+ 
+
+======================
 * Changement 0.0.3.1 *
 ======================
 - Correction d'une erreur avec le choix de la couleur du paper
