@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.3.1                        *
-* Modification ... : 01/09/2020                       *
+* Version ........ : V 0.0.3.2                        *
+* Modification ... : 04/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -605,7 +605,7 @@
   // * set_interruption_off()              *
   // ---------------------------------------
   /* Desavtive (off)/Reactive les interruptions*/
-  #define set_interruption_on()  POKE(56334L,PEEK(56334L)|1 
+  #define set_interruption_on()  POKE(56334L,PEEK(56334L)|1) 
   #define set_interruption_off() POKE(56334L,PEEK(56334L)&254)
   
   // ==================================
@@ -656,11 +656,11 @@
   
   
   // ==================
-  // * WBL and Raster *
+  // * VBL and Raster *
   // ==================
    unsigned int get_raster(void); // Récupére la ligne du raster
    void wait_vbl(void);  // Attendre jusque l'entrée du retour du balayage.
-  
+
   // ==============================================
   // * Générateur aléatoire de nombre sur 1 octet *
   // ==============================================

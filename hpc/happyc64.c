@@ -3,14 +3,15 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.3.1                        *
-* Modification ... : 1/09/2020                       *
+* Version ........ : V 0.0.3.2                        *
+* Modification ... : 4/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
 
 
 #include <happyc64.h>
+#include <cbm.h>
 
 // ===============================
 // ** Variable Global de Hapy64 **
@@ -439,15 +440,16 @@ void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned cha
   // ===================
   // * Attendre le VBL *
   // ===================
-  void wait_vbl(void)
+ void wait_vbl(void)
   {
-    while(get_raster()<252)
-    {
-      
-    }
     
-    
+    waitvsync();
+
+   
+
+ 
   }
+
   
   // ==============================================
   // * Généré un nombre pseudo aléatoire du 8bits *
