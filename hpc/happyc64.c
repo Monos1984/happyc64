@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.3.2                        *
-* Modification ... : 4/09/2020                       *
+* Version ........ : V 0.0.3.3                        *
+* Modification ... : 6/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -12,7 +12,7 @@
 
 #include <happyc64.h>
 #include <cbm.h>
-
+#include <string.h>
 // ===============================
 // ** Variable Global de Hapy64 **
 // ===============================
@@ -160,11 +160,19 @@ void set_location_character(unsigned char id)
 void load_pattern(unsigned int adr_cible,unsigned char *data_charset,unsigned char nb_pattern)
 {
   unsigned int nb_octet = nb_pattern<<3;
-  unsigned int i;
+      /* unsigned int i;
+  
+
   for (i=0;i<nb_octet;i++)
   {    
     POKE(adr_cible+i,data_charset[i]);
   }  
+     */
+  
+
+
+  memcpy((char*)adr_cible,(char*)data_charset,nb_octet);
+  
 }
 
   // ====================================
@@ -346,11 +354,14 @@ void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned cha
 {
   
   unsigned int nb_octet = nb_sprite<<6;
-  unsigned int i;
+ 
+  /* unsigned int i;
   for (i=0;i<nb_octet;i++)
   {    
     POKE(adr_cible+i,adr_data[i]);
   }  
+  */
+    memcpy((char*)adr_cible,(char*)adr_data,nb_octet);
   
 }
 
