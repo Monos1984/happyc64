@@ -1,4 +1,9 @@
 ======================
+* Changement 0.0.3.3 *
+======================
+- Le chargement des Assets (Sprite et charset) ne se font plus par boucle for, mais par memcpy !
+
+======================
 * Changement 0.0.3.2 *
 ======================
 - Correction d'une parenthèse dans la fonction set_interruption_on();
