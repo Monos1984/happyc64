@@ -1,4 +1,12 @@
 ======================
+* Changement 0.0.4.0 *
+======================
+- Correction de bug lord du changement de vic bank. La variable generique pour poser un tiles n'était pas mis à jour au bonne endroit.
+- Ajout d'une fonction pour modifier l'adresse (internet) de la tilemap pour utiliser les fonctions propre draw_tiles.
+- Changer de vic_bank et de pointeur de screen change automatiquement cette variable !
+
+
+======================
 * Changement 0.0.3.3 *
 ======================
 - Le chargement des Assets (Sprite et charset) ne se font plus par boucle for, mais par memcpy !
