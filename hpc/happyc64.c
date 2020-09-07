@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.3.3                        *
-* Modification ... : 6/09/2020                       *
+* Version ........ : V 0.0.4.0                        *
+* Modification ... : 7/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -17,6 +17,9 @@
 // ** Variable Global de Hapy64 **
 // ===============================
 unsigned int G_adr_tilemap = 1024l;
+unsigned char buffer_vic_bank = 0;
+unsigned char buffer_id_screen = 16;
+
 
 // ====================
 // ** NTSC(0)/PAL(1) **
@@ -123,6 +126,29 @@ void set_vic_bank(unsigned char id_bank)
   POKE (56578L,PEEK(56578L)|3);               // Mode Outputs
   POKE(REG_CIA2,(PEEK(REG_CIA2)& 252) | id_bank); // Selection de la bank.
   
+ 
+ switch(id_bank)
+ {
+    case 3:
+    buffer_vic_bank = 0;
+    break;
+    
+    case 2:
+    buffer_vic_bank = 1;
+    break;
+   
+    case 1:
+    buffer_vic_bank = 2;
+    break;
+    
+    case 0:
+    buffer_vic_bank = 3;
+    break;
+ }
+ 
+ 
+ G_adr_tilemap = (buffer_id_screen<<6)+(buffer_vic_bank<<14);
+  
 }
 
 // =================================================
@@ -131,8 +157,19 @@ void set_vic_bank(unsigned char id_bank)
 void set_adresse_screen_memory (unsigned char screen_memory_id_pointeur)
 {
    POKE(53272L,(PEEK(53272L)& 15) | screen_memory_id_pointeur); // Selection de l'emplacement en fonction de l'id du pointeur.
-   G_adr_tilemap = screen_memory_id_pointeur << 6; // Memorisation de l'adresse en dans la variable global G_adr_tilemap
+   buffer_id_screen = screen_memory_id_pointeur;
+   G_adr_tilemap = (screen_memory_id_pointeur<<6)+(buffer_vic_bank<<14);
 }
+
+//  ================================================================
+//  * Modifier la variable generique pour poser un tiles à l'écran *
+//  ================================================================
+void set_adresse_tilemap(unsigned int adresse)
+{
+  
+ G_adr_tilemap = adresse;
+}
+
 
 // =================================================
 // ** Récupéré l'adresse mémoire du screen memory **

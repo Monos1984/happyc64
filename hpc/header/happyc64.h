@@ -3,7 +3,7 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.3.3                        *
+* Version ........ : V 0.0.4.0                        *
 * Modification ... : 06/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
@@ -46,13 +46,12 @@
   // ====================
   // ** Registres bloc **
   // ====================
-  #define R_VIC     53248l // (Sprites et mémoire video)
+  #define R_VIC     53248l // 0xD000 (Sprites et mémoire video)
   #define R_SID     54272l // (Musique)
   #define R_COLOUR  55296l
   #define R_CIA1    53620l 
   #define R_CIA2    56576l
-  #define R_KERNEL  57344l
-  
+  #define R_KERNEL  57344l //0xE000  
   
   // ---------
   // * VIC 2 *
@@ -60,7 +59,7 @@
   #define REG_CIA2     56576L
   #define VIC_BANK_0        3   // Adresse $0000 -> $3FFF * Valeur par defaut
   #define VIC_BANK_1        2   // Adresse $4000 -> $7FFF * La Rom Tiles n'est pas dispo.
-  #define VIC_BANK_2        1   // Adresse $8000 -> $B000
+  #define VIC_BANK_2        1   // Adresse $8000 -> $BFFF
   #define VIC_BANK_3        0   // Adresse $C000 -> $FFFF * La Rom Tiles n'est pas dispo.
   
   // ---------------------------
@@ -245,7 +244,18 @@
   */
   void set_adresse_screen_memory (unsigned char screen_memory_id_pointeur); 
   
-   // --------------------------------------------------------
+  
+  // ---------------------------------------------
+  // * set_adresse_tilemap(unsigned int adresse) *
+  // ---------------------------------------------
+  /*
+    Permet de configurer manuellement l'adresse de la tilemap(screen memory)
+    Adresse : Adresse complet 
+    Note :  Configuration indispensable pour utiliser les fonctions draw_tiles.
+  */
+  void set_adresse_tilemap(unsigned int adresse);
+  
+  // --------------------------------------------------------
   // * get_adresse_screen_memory()                          *
   // --------------------------------------------------------
   /*
@@ -691,5 +701,7 @@
   */
   
   #define POKE(addr,val)     (*(unsigned char*) (addr) = (val))
+  
+
   
 #endif
