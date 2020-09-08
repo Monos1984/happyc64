@@ -1,31 +1,47 @@
-======================
+**************************************
+***            Happy C64           ***
+**************************************
+Librairie de fonction en C pour programmer le commodore 64 avec le compilateur CC64
+
+=========================
+* Licence d'utilisation *
+=========================
+- La librairie ne peux pas être vendu.
+- L'utilisation de la librairie dans les programmes commerciaux est autorisé.
+- Le Droit auteur : Un petit "Fait avec HappyC64" Ou ce genre de chose est très apréciable. 
+- Le code source de Happy C64 est présent, vous pouvez le modifier pour votre utilisation et le redistribuer sous les mêmes conditions.
+
+==============================
+* Changement de la librairie *
+==============================
+mise à jour le 7/9/2020
+
+----------------------
 * Changement 0.0.4.0 *
-======================
+----------------------
 - Correction de bug lord du changement de vic bank. La variable generique pour poser un tiles n'était pas mis à jour au bonne endroit.
 - Ajout d'une fonction pour modifier l'adresse (internet) de la tilemap pour utiliser les fonctions propre draw_tiles.
 - Changer de vic_bank et de pointeur de screen change automatiquement cette variable !
 
-
-======================
+----------------------
 * Changement 0.0.3.3 *
-======================
+----------------------
 - Le chargement des Assets (Sprite et charset) ne se font plus par boucle for, mais par memcpy !
 
-======================
+----------------------
 * Changement 0.0.3.2 *
-======================
+----------------------
 - Correction d'une parenthèse dans la fonction set_interruption_on();
 - Wait VBL opérationel. (Ce n'étais pas le cas jusque la)
 - Les fonctions du fichier cbm.h sont accecible.
  
-
-======================
+----------------------
 * Changement 0.0.3.1 *
-======================
+----------------------
 - Correction d'une erreur avec le choix de la couleur du paper
 - léger Amélioration de vitesse pour afficher un tile à l'écran 
 
-======================
+----------------------
 * Changement 0.0.3.0 *
-======================
+----------------------
 Ajout de get_system() qui permet de tester si la machine est en PAL ou en NTSC
