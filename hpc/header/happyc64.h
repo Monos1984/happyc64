@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.4.0                        *
-* Modification ... : 06/09/2020                       *
+* Version ........ : V 0.0.5.0                        *
+* Modification ... : 10/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -702,6 +702,53 @@
   
   #define POKE(addr,val)     (*(unsigned char*) (addr) = (val))
   
-
+ 
+ 
+ 
+  // ========================  
+  // * Gestion de Save Data *
+  // ========================
+  
+  
+  // --------------------------------------------------------------------------------------------
+  // * save_file(unsigned char*name,const void* buffer, unsigned int size,unsigned char device) *
+  // --------------------------------------------------------------------------------------------
+  /* - Permet d'écrire dans un fichier le contenue d'un buffer.
+       #name : Le nom du fichier. un ,"option" permet de typer le fichier.
+              d : del 
+              s : Sequenciel (seq)
+              u : USR
+              p : PRG (defaut)
+              l : REL
+              exemple : "data,s"
+       #buffer : adresse ou Nom du tableau
+       #size   : Taille du fichier à enregistrer. (Sur disquette 2 octets va s'ajouter au début du fichier)
+       #device : Id du device. 1 pour casette, 8 pour lecteur disquette 1, 9 pour lecteur disquette 2 ... 
+  */
+  unsigned char save_file(unsigned char*name,const void* buffer, unsigned int size,unsigned char device);
+  
+  // ------------------------------------------------------------------------
+  // * load_file(const char*name, const void* buffer, unsigned char device) *
+  // ------------------------------------------------------------------------
+  /* - Permet de charger dans un buffer le contenue d'un fichier
+       #name : Le nom du fichier. un ,"option" permet de typer le fichier.
+              d : del 
+              s : Sequenciel (seq)
+              u : USR
+              p : PRG (defaut)
+              l : REL
+              exemple : "data,s"
+              
+       #buffer: Adresse ou nom du tableau de buffer.
+       #device : Id du device. 1 pour casette, 8 pour lecteur disquette 1, 9 pour lecteur disquette 2 ... 
+       
+       Note : Les deux octets du "header" ne sont pas enregistré dans le buffer.
+  */
+  unsigned int load_file(const char*name, const void* buffer, unsigned char device);
+  
+  
+  
+  
+  
   
 #endif

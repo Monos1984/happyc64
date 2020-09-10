@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.4.0                        *
-* Modification ... : 7/09/2020                       *
+* Version ........ : V 0.0.5.0                        *
+* Modification ... : 10/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -460,14 +460,14 @@ void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned cha
   
   unsigned int get_timer_a(void)
  {
-  unsigned int time = (PEEK(0xDC06)<<8 + PEEK( 0xDC04));
+  unsigned int time = (PEEK(0xDC05)<<8 + PEEK( 0xDC04));
    return time;
 
  }
  
    unsigned int get_timer_b(void)
  {
-  unsigned int time = (PEEK(0xDC06)<<8 + PEEK( 0xDC04));
+  unsigned int time = (PEEK(0xDC07)<<8 + PEEK( 0xDC06));
    return time;
 
  }
@@ -516,4 +516,38 @@ void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned cha
      return valeur_genere;
     
   }
+  
+  // *****************
+  // * Fonction Beta *
+  // *****************
+  
+  // =========================================
+  // * Sauvegarder dans un fichier un buffer *
+  // =========================================
+  
+  unsigned char save_file(unsigned char*name,const void* buffer, unsigned int size,unsigned char device)
+  { 
+    unsigned char error;
+
+    cbm_k_setlfs (1, device,1);
+    cbm_k_setnam (name);
+
+    error = cbm_k_save((int)buffer,(int)buffer+size);
+    return error;
+  }
+  
+ 
+  // ================================================
+  // * Charger les data d'un fichier dans un buffer *
+  // ================================================
+  
+  unsigned int load_file(const char*name, const void* buffer, unsigned char device)
+  {
+   
+    cbm_load (name, device, buffer);
+    return 0;
+    
+  }
+
+  
  
