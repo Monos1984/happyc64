@@ -17,6 +17,14 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 mise à jour le 7/9/2020
 
 ----------------------
+* Changement 0.0.5.0 *
+----------------------
+- Ajout de la fonction load_file() 
+- Ajout de la fonction save_file()
+- Correction des adresses du timer A et B.
+
+
+----------------------
 * Changement 0.0.4.0 *
 ----------------------
 - Correction de bug lord du changement de vic bank. La variable generique pour poser un tiles n'était pas mis à jour au bonne endroit.
