@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.5.0                        *
-* Modification ... : 10/09/2020                       *
+* Version ........ : V 0.0.6.0                        *
+* Modification ... : 12/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -92,6 +92,8 @@
 	#define REG_COLOR_BACKGROUND         53281L // Registre pour modifier la couleur du PAPER
   #define REG_COLOR_BACKGROUND_1       53282L // Registre pour modifier la couleur du PAPER
   #define REG_COLOR_BACKGROUND_2       53283L // Registre pour modifier la couleur du PAPER
+  #define REG_COLOR_BACKGROUND_3       53284L // Registre pour modifier la couleur du PAPER
+  
   #define REG_TILEMAP                  1024L // Registre de départ de la mémoire video pour les tilemaps
   #define REG_COLOR_MAP                55296L // Registre de départ de la mémoire video pour la color map
   
@@ -374,33 +376,42 @@
   void set_color_border (unsigned char color_id); 
 
     
-  // ---------------------------------------
+  // -------------------------------------------
   // * set_color_background(color_id)          *
-  // ---------------------------------------
+  // -------------------------------------------
   /*
     - Permet de modifier la couleur du papier du C64
      # color_id : index de la couleur du nuancier du C64.
   */
   void set_color_background (unsigned char color_id); 
   
-  // ---------------------------------------
+  // ---------------------------------------------
   // * set_color_background_1(color_id)          *
-  // ---------------------------------------
+  // ---------------------------------------------
   /*
     - Permet de modifier la couleur du background 1 du C64
      # color_id : index de la couleur du nuancier du C64.
   */
   void set_color_background_1 (unsigned char color_id); 
   
-    // ---------------------------------------
+  // ---------------------------------------------
   // * set_color_background_2(color_id)          *
-  // ---------------------------------------
+  // ---------------------------------------------
   /*
-    - Permet de modifier la couleur du background 1 du C64
+    - Permet de modifier la couleur du background 2 du C64
      # color_id : index de la couleur du nuancier du C64.
   */
   void set_color_background_2 (unsigned char color_id); 
 
+
+  // ---------------------------------------------
+  // * set_color_background_3(color_id)          *
+  // ---------------------------------------------
+  /*
+    - Permet de modifier la couleur du background 3 du C64
+     # color_id : index de la couleur du nuancier du C64.
+  */
+  void set_color_background_3 (unsigned char color_id); 
 
   // --------------------------------------------------------------------------
   // *draw_full_charset(position_x, position_y,id_charset, color_id)          *
@@ -721,7 +732,7 @@
               p : PRG (defaut)
               l : REL
               exemple : "data,s"
-       #buffer : adresse ou Nom du tableau
+       #buffer : pointeur ou Nom du tableau
        #size   : Taille du fichier à enregistrer. (Sur disquette 2 octets va s'ajouter au début du fichier)
        #device : Id du device. 1 pour casette, 8 pour lecteur disquette 1, 9 pour lecteur disquette 2 ... 
   */
@@ -739,7 +750,7 @@
               l : REL
               exemple : "data,s"
               
-       #buffer: Adresse ou nom du tableau de buffer.
+       #buffer: pointeur ou nom du tableau de buffer.
        #device : Id du device. 1 pour casette, 8 pour lecteur disquette 1, 9 pour lecteur disquette 2 ... 
        
        Note : Les deux octets du "header" ne sont pas enregistré dans le buffer.

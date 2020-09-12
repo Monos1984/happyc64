@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.5.0                        *
-* Modification ... : 10/09/2020                       *
+* Version ........ : V 0.0.6.0                        *
+* Modification ... : 12/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -70,6 +70,16 @@ void set_color_background_2(unsigned char color_id)
 		POKE(REG_COLOR_BACKGROUND_2 ,color_id);
 }
 
+
+// =========================================
+// ** Modifier la couleur du background_3 **
+// =========================================
+// * color_id : Numeros de la couleur      *
+// =========================================
+void set_color_background_3(unsigned char color_id)
+{
+		POKE(REG_COLOR_BACKGROUND_3 ,color_id);
+}
 
 // =====================
 // ** Effacer l'écran **
