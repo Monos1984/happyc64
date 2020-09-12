@@ -3,7 +3,7 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.6.0                        *
+* Version ........ : V 0.0.7.0                        *
 * Modification ... : 12/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
@@ -220,6 +220,43 @@
 	#define KEY_F3 5
 	#define KEY_F5 6
 	#define KEY_F7 3
+  
+  
+  // ========================
+  // ** Les Fonctions Text **
+  // ========================
+  
+ // ----------------------------------------------------- 
+ // *   void set_pointeur_text(unsigned char pointeur)  *
+ // ----------------------------------------------------- 
+  /*
+    Permet de definir le charset lié à l'espace dans la zone des caractères. (Code ASCII)
+  */
+  void set_pointeur_text(unsigned char pointeur);
+  
+ // ----------------------------------------------------------------------------------------------- 
+ // *  void draw_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color)  *
+ // -----------------------------------------------------------------------------------------------
+ /*
+  Permet d'afficher un text à l'écran.
+ */
+  void draw_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color);
+  
+ // --------------------------------------------------------------------------------------------------- 
+ // * void draw_valeur_8 (unsigned char px,unsigned char py,unsigned char valeur,unsigned char color) *
+ // ---------------------------------------------------------------------------------------------------
+ /*
+  Permet d'afficher une valeur 8 bits à l'écran
+ */
+  void draw_valeur_8 (unsigned char px,unsigned char py,unsigned char valeur,unsigned char color);
+  
+ // --------------------------------------------------------------------------------------------------- 
+ // * void draw_valeur_16 (unsigned char px,unsigned char py,unsigned char valeur,unsigned char color) *
+ // ---------------------------------------------------------------------------------------------------
+ /*
+  Permet d'afficher une valeur 16 bits à l'écran
+ */
+  void draw_valeur_16 (unsigned char px,unsigned char py,unsigned int valeur,unsigned char color);
    
   // ===============================
   // ** Les Fonctions Video       **

@@ -3,7 +3,7 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.6.0                        *
+* Version ........ : V 0.0.7.0                        *
 * Modification ... : 12/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
@@ -13,13 +13,70 @@
 #include <happyc64.h>
 #include <cbm.h>
 #include <string.h>
+#include <stdio.h>
+
 // ===============================
 // ** Variable Global de Hapy64 **
 // ===============================
 unsigned int G_adr_tilemap = 1024l;
 unsigned char buffer_vic_bank = 0;
 unsigned char buffer_id_screen = 16;
+unsigned char text_pointeur=0;
 
+unsigned char buffer_8[8];
+unsigned char buffer_16[16];
+
+// =====================================================
+// ** void set_pointeur_text(unsigned char pointeur); **
+// =====================================================
+void set_pointeur_text(unsigned char pointeur)
+{
+  text_pointeur = pointeur;
+}
+
+
+void draw_valeur_8 (unsigned char px,unsigned char py,unsigned char valeur,unsigned char color)
+{
+  sprintf(buffer_8,"%d",valeur);
+  draw_text( px,py,buffer_8,color);
+}
+
+
+void draw_valeur_16 (unsigned char px,unsigned char py,  unsigned int valeur,unsigned char color)
+{
+  sprintf(buffer_16,"%u",valeur);
+  draw_text( px,py,buffer_16,color);
+}
+
+// ===============
+// ** Draw Text **
+// ===============
+void draw_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color)
+{
+  unsigned char i=0;
+  unsigned char  id_tiles;
+  while ('\0' != text[i])
+  {
+    id_tiles = text[i];
+  
+
+    if ( (id_tiles>64) & (id_tiles<90))
+    {
+      id_tiles = id_tiles+32;
+    }
+ 
+
+    else if (id_tiles>192)
+    {
+    id_tiles = id_tiles - 128;
+    }
+
+    
+    draw_full_charset(px, py,id_tiles-32+text_pointeur,color);
+    px++;
+    i++;
+  }
+}
 
 // ====================
 // ** NTSC(0)/PAL(1) **
@@ -89,13 +146,14 @@ void cls(unsigned char id_tiles)
  
 
  
-
+/*
  unsigned int index;
   for (index = 0; index <1000; index++)
   {
     POKE(G_adr_tilemap+index,id_tiles);
   }
-
+*/
+ memset((char*)G_adr_tilemap,id_tiles,1000);
   
 }
 
