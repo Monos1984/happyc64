@@ -17,6 +17,16 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 mise à jour le 12/9/2020
 
 ----------------------
+* Changement 0.0.7.0 *
+----------------------
+
+
+- Ajout de la fonction draw_text();
+- Ajout de la fonction set_pointeur_text();
+- Ajout de la fonction draw_valeur_16() et draw_valeur_8() qui permettent d'afficher des valeurs 8 et 16 bits meme contenue dans une variable char ou int.
+- modification interne du cls(id_tiles). On passe par un memset au lieu de boucle. Amélioration de vitesse.
+
+----------------------
 * Changement 0.0.6.0 *
 ----------------------
 - Ajout de la fonction pour changer le background 3 pour le mode extended.
