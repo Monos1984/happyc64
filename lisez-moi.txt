@@ -14,7 +14,12 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 7/9/2020
+mise à jour le 12/9/2020
+
+----------------------
+* Changement 0.0.6.0 *
+----------------------
+- Ajout de la fonction pour changer le background 3 pour le mode extended.
 
 ----------------------
 * Changement 0.0.5.0 *
