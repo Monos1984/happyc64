@@ -14,7 +14,15 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 12/9/2020
+mise à jour le 13/9/2020
+
+
+----------------------
+* Changement 0.0.8.0 *
+----------------------
+- Ajout de la fonction draw_charset_line_H() et draw_charset_line_V()
+- Ajout de la fonction cls_color_map()
+
 
 ----------------------
 * Changement 0.0.7.0 *
