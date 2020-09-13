@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.7.0                        *
-* Modification ... : 12/09/2020                       *
+* Version ........ : V 0.0.8.0                        *
+* Modification ... : 13/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -25,6 +25,24 @@ unsigned char text_pointeur=0;
 
 unsigned char buffer_8[8];
 unsigned char buffer_16[16];
+
+
+/*
+
+// =====================
+// * init interruption *
+// =====================
+void init_adr_irq(unsigned int adresse)
+{
+  
+  
+  POKE(REG_ADR_HAUT_IRQ,(adresse & 0b1111111100000000)>>8);
+  POKE(REG_ADR_BASS_IRQ,(adresse & 0b0000000011111111)   );
+
+}
+
+*/
+
 
 // =====================================================
 // ** void set_pointeur_text(unsigned char pointeur); **
@@ -145,14 +163,6 @@ void cls(unsigned char id_tiles)
 {
  
 
- 
-/*
- unsigned int index;
-  for (index = 0; index <1000; index++)
-  {
-    POKE(G_adr_tilemap+index,id_tiles);
-  }
-*/
  memset((char*)G_adr_tilemap,id_tiles,1000);
   
 }
@@ -560,9 +570,6 @@ void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned cha
   {
     
     waitvsync();
-
-   
-
  
   }
 
@@ -618,4 +625,32 @@ void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned cha
   }
 
   
+  // =========
+  // * Tools *
+  // =========
+  
+  
+  void cls_color_ram(unsigned char color)
+  {
+     memset((char*)REG_COLOR_MAP,color,1000);
+  }
+  
+  void draw_charset_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color)
+  {
+    unsigned char i;
+    for (i=0;i<size;i++)
+    {
+      draw_full_charset(px+i,py,id_charset,color); 
+    }
+    
+  }
  
+  void draw_charset_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color)
+  {
+    unsigned char i;
+    for (i=0;i<size;i++)
+    {
+      draw_full_charset(px,py+i,id_charset,color); 
+    }
+    
+  }

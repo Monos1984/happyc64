@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.7.0                        *
-* Modification ... : 12/09/2020                       *
+* Version ........ : V 0.0.8.0                        *
+* Modification ... : 13/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -220,6 +220,43 @@
 	#define KEY_F3 5
 	#define KEY_F5 6
 	#define KEY_F7 3
+  
+  
+  // =======================
+  // * Interruption VIC II *
+  // =======================
+  #define REG_IRQ $D019 
+  
+  /* 
+  BIT :           Effet :
+  -----------------------------------------------
+  7........: IRQ VIC II (Vic en interuption si 1)
+  -----------------------------------------------
+  6 .......: OSEF
+  ------------------------------------------------
+  5 .......: OSEF
+  ------------------------------------------------
+  4
+  ------------------------------------------------
+  3 .......: Photostyle
+  ------------------------------------------------
+  2 .......: Collision Sprite/Sprite
+  ------------------------------------------------
+  1 .......: Collision Tiles/Sprites
+  ------------------------------------------------
+  0 .......: Balayagte Ecran atteintes (ligne raster ?)
+  ------------------------------------------------
+  
+  */
+  
+  #define REG_ADR_HAUT_IRQ 0x315
+  #define REG_ADR_BASS_IRQ 0x314
+  
+  // =============================================
+  // * Gestion des interuptions En cours de test *
+  // =============================================
+ //  void init_adr_irq(unsigned int adresse);
+  
   
   
   // ========================
@@ -487,6 +524,14 @@
   void set_color_map(unsigned char position_x, unsigned char position_y,unsigned char color_id);
   
   
+  // -------------------------------------------
+  // * void cls_color_ram(unsigned char color) *
+  // -------------------------------------------
+  /*
+    - Permet de remplire la color_ram d'une couleur unique :
+    # color : Numero de la couleur
+  */
+  void cls_color_ram(unsigned char color);
   
   // ================================
   // ** Configuration video       **
@@ -662,7 +707,7 @@
   // * set_interruption_on()               *
   // * set_interruption_off()              *
   // ---------------------------------------
-  /* Desavtive (off)/Reactive les interruptions*/
+  /* Desavtive (off)/Reactive (on) les interruptions*/
   #define set_interruption_on()  POKE(56334L,PEEK(56334L)|1) 
   #define set_interruption_off() POKE(56334L,PEEK(56334L)&254)
   
@@ -794,7 +839,11 @@
   */
   unsigned int load_file(const char*name, const void* buffer, unsigned char device);
   
-  
+  // ---------
+  // * Tools *
+  // ---------
+    void draw_charset_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color);
+      void draw_charset_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color);
   
   
   
