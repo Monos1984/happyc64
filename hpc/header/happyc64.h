@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.8.0                        *
-* Modification ... : 13/09/2020                       *
+* Version ........ : V 0.0.9.0                        *
+* Modification ... : 17/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -796,7 +796,27 @@
   #define POKE(addr,val)     (*(unsigned char*) (addr) = (val))
   
  
+ // ---------------------------------------
+  // * PEEKW(addr)                          *
+  // ---------------------------------------
+  /* 
+    - Permet de lire 2 octets à une adresse 
+     # addr : Adresse mémoire sur 2 octets (int)
+  */
  
+  #define PEEKW(addr)         (*(unsigned int*) (addr))
+  
+  // ---------------------------------------
+  // * POKEW(adrr,val)                      *
+  // ---------------------------------------
+  /* 
+    - Permet d'écrire un octet à une adresse
+     # addr : Adresse mémoire sur 2 octets (int)
+     # val  : valeur sur 2 octet (0-65535) 
+  */
+  
+  #define POKEW(addr,val)     (*(unsigned int*) (addr) = (val))
+  
  
   // ========================  
   // * Gestion de Save Data *
