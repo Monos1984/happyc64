@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.0.9.0                        *
-* Modification ... : 17/09/2020                       *
+* Version ........ : V 0.0.10.0                        *
+* Modification ... : 18/09/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -862,9 +862,20 @@
   // ---------
   // * Tools *
   // ---------
-    void draw_charset_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color);
-      void draw_charset_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color);
-  
+  void draw_charset_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color);
+  void draw_charset_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color);
+ 
+ // ----------------------
+ // * rle_decrompression *
+ // ----------------------
+ /*
+  Permet de decompresser une série de valeur en mode RLE.
+  Attention une valeur 0 au nombre de fois q'une valeur est dupliqué, met fin à la routine de decryptage. Ce qui veux dire qu'il faut terminer sa série de compression par un 0.
+  C'est un simple format RLE ! 1,2 veux dire copie 1 fois la valeur 2.
+  5,12 veux dire copie en mémoire 5 fois la valeur 12.
+   
+ */ 
+  void rle_decrompression(unsigned int source,unsigned int destination);
   
   
   
