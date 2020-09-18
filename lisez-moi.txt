@@ -14,7 +14,13 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 17/9/2020
+mise à jour le 18/9/2020
+
+=======================
+* Changement 0.0.10.0 *
+=======================
+- Ajout de la fonction void rle_decompression(); qui permet de decompresser des datas en mode RLE.
+
 
 ----------------------
 * Changement 0.0.9.0 *
