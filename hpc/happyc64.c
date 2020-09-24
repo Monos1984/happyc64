@@ -286,7 +286,7 @@ void set_data_character(unsigned int memory_adresse,unsigned char *data_characte
 // ====================================
 // - Parametrer le pointeur de sprite - 
 // ====================================
-void set_sprite_pointers(unsigned char id_sprite,unsigned char value)
+void set_pointers_sprite(unsigned char id_sprite,unsigned char value)
 {
   POKE(G_adr_tilemap+1016+id_sprite,value);
 }
