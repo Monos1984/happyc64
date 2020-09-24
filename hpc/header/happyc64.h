@@ -103,7 +103,7 @@
   #define BACKGROUND_0 53281L          // Paire de Bit 00 en multicouleur. (Screen Color)
   #define BACKGROUND_1 53282L          // Paire de Bit 01 en Multicouleur
   #define BACKGROUND_2 53283L          // Paire de Bit 10 en Multicouleur
-                                       // Paire de Bit 11 Couleurs Specifique de l'emplacement du charset. (Maximum 3 bits)                             
+                                       // Paire de Bit 11 Couleurs Specifique de l'emplacement du character. (Maximum 3 bits)                             
   
   // -----------------------------
   // * Les registres des sprites *
@@ -267,9 +267,9 @@
  // *   void set_pointeur_text(unsigned char pointeur)  *
  // ----------------------------------------------------- 
   /*
-    Permet de definir le charset lié à l'espace dans la zone des caractères. (Code ASCII)
+    Permet de definir le character lié à l'espace dans la zone des caractères. (Code ASCII)
   */
-  void set_pointeur_text(unsigned char pointeur);
+  void set_text_pointer(unsigned char pointer);
   
  // ----------------------------------------------------------------------------------------------- 
  // *  void draw_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color)  *
@@ -285,7 +285,7 @@
  /*
   Permet d'afficher une valeur 8 bits à l'écran
  */
-  void draw_valeur_8 (unsigned char px,unsigned char py,unsigned char valeur,unsigned char color);
+  void draw_text_value_8 (unsigned char px,unsigned char py,unsigned char value,unsigned char color);
   
  // --------------------------------------------------------------------------------------------------- 
  // * void draw_valeur_16 (unsigned char px,unsigned char py,unsigned char valeur,unsigned char color) *
@@ -293,7 +293,7 @@
  /*
   Permet d'afficher une valeur 16 bits à l'écran
  */
-  void draw_valeur_16 (unsigned char px,unsigned char py,unsigned int valeur,unsigned char color);
+  void draw_text_value_16 (unsigned char px,unsigned char py,unsigned int value,unsigned char color);
    
   // ===============================
   // ** Les Fonctions Video       **
@@ -325,9 +325,12 @@
   // * set_adresse_tilemap(unsigned int adresse) *
   // ---------------------------------------------
   /*
-    Permet de configurer manuellement l'adresse de la tilemap(screen memory)
+    Permet de configurer manuellement l'adresse interne de la tilemap(screen memory) 
+    
     Adresse : Adresse complet 
-    Note :  Configuration indispensable pour utiliser les fonctions draw_tiles.
+    Note :  Configuration indispensable pour utiliser les fonctions draw_tiles ceci dit en modifiant 
+    la bank du vic et en utilisant le set_adresse_screen_memory, la variable se met à jour automatiquement.
+    
   */
   void set_adresse_tilemap(unsigned int adresse);
   
@@ -336,7 +339,7 @@
   // --------------------------------------------------------
   /*
     - Permet de récupérer l'emplacement de l'adresse mémoire.
-   
+    
   */
  int get_adresse_screen_memory();
   
@@ -344,7 +347,7 @@
   // * load_pattern(adresse cible , adresse source , nombre de pattern) *
   // --------------------------------------------------------------------
   /* Permet de mémoriser dans le C64 les données des pattern des tiles à  l'endroit voulu */
-  void load_pattern(unsigned int adr_cible,unsigned char *data_charset,unsigned char nb_pattern);
+  void set_data_character(unsigned int memory_adresse,unsigned char *data_character,unsigned char nb_pattern);
   
    
   // ------------------------------
@@ -380,7 +383,7 @@
   // * SET_MULTICOLOR_MODE_ON *
   // -----------------------------------------------------
   /*
-    - Permet d'activer le mode multicolor pour les charsets.
+    - Permet d'activer le mode multicolor pour les characters.
     
   */
   #define SET_MULTICOLOR_MODE_ON    POKE(53270L,(PEEK(53270L)  | 16 )) 
@@ -389,7 +392,7 @@
   // * SET_MULTICOLOR_MODE_OFF *
   // -----------------------------------------------------
   /*
-    - Permet d'activer le mode standard pour les charsets.
+    - Permet d'activer le mode standard pour les characters.
     
   */
   #define SET_MULTICOLOR_MODE_OFF  POKE(53270L,(PEEK(53270L)  & 239 )); 
@@ -488,38 +491,38 @@
   void set_color_background_3 (unsigned char color_id); 
 
   // --------------------------------------------------------------------------
-  // *draw_full_charset(position_x, position_y,id_charset, color_id)          *
+  // *draw_full_character(position_x, position_y,id_character, color_id)          *
   // --------------------------------------------------------------------------
   /*
-    - Permet d'afficher un charset à l'écran et la couleur de la case 
-     # position_x : position horizontale du charset sur le quadrillage 8x8. (0-255)
-     # position_x : position verticale du charset sur le quadrillage 8x8.(0-255)
-     # id_charset : index du charset à poser. (0-255)
-     # color_id   : couleur du charset.    
+    - Permet d'afficher un character à l'écran et la couleur de la case 
+     # position_x : position horizontale du character sur le quadrillage 8x8. (0-255)
+     # position_x : position verticale du character sur le quadrillage 8x8.(0-255)
+     # id_character : index du character à poser. (0-255)
+     # color_id   : couleur du character.    
   */
-  void draw_full_charset(unsigned char position_x, unsigned char position_y, unsigned char id_charset,unsigned char color_id);
+  void draw_full_character(unsigned char position_x, unsigned char position_y, unsigned char id_character,unsigned char color_id);
   
   
   // ----------------------------------------------------------------------------------------------
-  // * draw_charset(unsigned char position_x, unsigned char position_y, unsigned char id_charset) *
+  // * draw_character(unsigned char position_x, unsigned char position_y, unsigned char id_character) *
   // ----------------------------------------------------------------------------------------------
   /*
-    - Permet d'afficher un charset à l'écran 
-     # position_x : position horizontale du charset sur le quadrillage 8x8. (0-255)
-     # position_x : position verticale du charset sur le quadrillage 8x8.(0-255)
-     # id_charset : index du charset à poser. (0-255)
+    - Permet d'afficher un character à l'écran 
+     # position_x : position horizontale du character sur le quadrillage 8x8. (0-255)
+     # position_x : position verticale du character sur le quadrillage 8x8.(0-255)
+     # id_character : index du character à poser. (0-255)
         
   */ 
-  void draw_charset(unsigned char position_x, unsigned char position_y, unsigned char id_charset);
+  void draw_character(unsigned char position_x, unsigned char position_y, unsigned char id_character);
   
   // --------------------------------------------------------------------------------------------
   // * set_color_map(unsigned char position_x, unsigned char position_y,unsigned char color_id) *
   // --------------------------------------------------------------------------------------------
   /*
     - Permet de modifier la color map à un emplacement !
-    # position_x : position horizontale du charset sur le quadrillage 8x8. (0-255)
-    # position_x : position verticale du charset sur le quadrillage 8x8.(0-255)
-    # color_id   : couleur du charset.    
+    # position_x : position horizontale du character sur le quadrillage 8x8. (0-255)
+    # position_x : position verticale du character sur le quadrillage 8x8.(0-255)
+    # color_id   : couleur du character.    
   */
   void set_color_map(unsigned char position_x, unsigned char position_y,unsigned char color_id);
   
@@ -554,7 +557,7 @@
   // ** Scrolling **
   // ===============
   void set_scrolling_horizontal(signed char Scroll_X);
-  void set_scrolling_verticale(unsigned char Scroll_Y);
+  void set_scrolling_vertical(unsigned char Scroll_Y);
   
   // =========================
   // ** Gestion des sprites **
@@ -579,7 +582,7 @@
      # id_pointeur  : Valeur du pointeur. 
      l'emplacement finale se trouve donc à l'adresse du bank vic + Valeur du pointeur*64
   */
-  void set_pointeurs_sprites(unsigned char id_sprite,unsigned char id_pointeur);
+  void set_pointers_sprite(unsigned char id_sprite,unsigned char id_pointer);
   
   // ---------------------------
   // * hide_sprite(id_sprite) *
@@ -638,7 +641,7 @@
  void set_sprite_color_2(unsigned char  color_id);
  
  // ----------------------------------------------------------------
- // * Récupérer la collision du sprite sur un sprite ou un charset *
+ // * Récupérer la collision du sprite sur un sprite ou un character *
  // ----------------------------------------------------------------
  /*
    Bit x = 0 par de collision
@@ -655,7 +658,7 @@
  */
  
  #define get_collision_sprite()  PEEK(0xD01E)
- #define get_collision_charset() PEEK(0xD01F)
+ #define get_collision_character() PEEK(0xD01F)
  
  
   // ================================
@@ -767,7 +770,7 @@
   // ==============================================
   // * Générateur aléatoire de nombre sur 1 octet *
   // ==============================================
-   unsigned char get_rnd(unsigned char nombre_max);
+   unsigned char get_rnd(unsigned char max_number);
   
   
   // ===================
@@ -862,8 +865,8 @@
   // ---------
   // * Tools *
   // ---------
-  void draw_charset_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color);
-  void draw_charset_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color);
+  void draw_character_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color);
+  void draw_character_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color);
  
  // ----------------------
  // * rle_decrompression *
@@ -876,7 +879,6 @@
    
  */ 
   void rle_decrompression(unsigned int source,unsigned int destination);
-  
-  
+  void rle_compression(unsigned int source,unsigned int destination,unsigned int size);
   
 #endif

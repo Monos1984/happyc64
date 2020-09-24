@@ -18,7 +18,7 @@
 // ===============================
 // ** Variable Global de Hapy64 **
 // ===============================
-unsigned int G_adr_tilemap = 1024l;
+unsigned int  G_adr_tilemap = 1024l;
 unsigned char buffer_vic_bank = 0;
 unsigned char buffer_id_screen = 16;
 unsigned char text_pointeur=0;
@@ -47,22 +47,22 @@ unsigned char buffer_16[16];
 // =====================================================
 // ** void set_pointeur_text(unsigned char pointeur); **
 // =====================================================
-void set_pointeur_text(unsigned char pointeur)
+void set_text_pointer(unsigned char pointer)
 {
-  text_pointeur = pointeur;
+  text_pointeur = pointer;
 }
 
 
-void draw_valeur_8 (unsigned char px,unsigned char py,unsigned char valeur,unsigned char color)
+void draw_text_value_8 (unsigned char px,unsigned char py,unsigned char value,unsigned char color)
 {
-  sprintf(buffer_8,"%d",valeur);
+  sprintf(buffer_8,"%d",value);
   draw_text( px,py,buffer_8,color);
 }
 
 
-void draw_valeur_16 (unsigned char px,unsigned char py,  unsigned int valeur,unsigned char color)
+void draw_text_value_16 (unsigned char px,unsigned char py,  unsigned int value,unsigned char color)
 {
-  sprintf(buffer_16,"%u",valeur);
+  sprintf(buffer_16,"%u",value);
   draw_text( px,py,buffer_16,color);
 }
 
@@ -90,7 +90,7 @@ void draw_text(unsigned char px,unsigned char py,unsigned char* text,unsigned ch
     }
     
     
-    draw_full_charset(px, py,id_tiles-32+text_pointeur,color);
+    draw_full_character(px, py,id_tiles-32+text_pointeur,color);
     px++;
     i++;
   }
@@ -168,23 +168,23 @@ void cls(unsigned char id_tiles)
 }
 
 // =======================================
-// ** Afficher un charset à l'ecran     **
+// ** Afficher un character à l'ecran     **
 // =======================================
 
-void draw_full_charset(unsigned char position_x, unsigned char position_y, unsigned char id_charset, unsigned char color_id)
+void draw_full_character(unsigned char position_x, unsigned char position_y, unsigned char id_character, unsigned char color_id)
 {
   unsigned int calcule_adresse;
   calcule_adresse = (position_y<<5) + (position_y<<3)+position_x;
   
-  POKE(G_adr_tilemap+calcule_adresse,id_charset);
+  POKE(G_adr_tilemap+calcule_adresse,id_character);
   POKE(REG_COLOR_MAP+calcule_adresse,color_id);
 }
 
 
-void draw_charset(unsigned char position_x, unsigned char position_y, unsigned char id_charset)
+void draw_character(unsigned char position_x, unsigned char position_y, unsigned char id_character)
 {
   
-  POKE(G_adr_tilemap+position_x+40*position_y,id_charset);
+  POKE(G_adr_tilemap+position_x+40*position_y,id_character);
   
 }
 
@@ -253,10 +253,14 @@ void set_adresse_tilemap(unsigned int adresse)
 // ** Récupéré l'adresse mémoire du screen memory **
 // =================================================
 /*
+    note : c'est l'adresse contenu dans la variable interne de happyc64 du pointeur de screen momory
+    pour l'utilisation des fonctions draw_character et draw_full_character...
+*/
   int get_adresse_screen_memory()
   {
-  return G_adr_tilemap;
-}*/
+    return G_adr_tilemap;
+  }
+
 
 // ======================================
 // ** Modifier l'emplacement des tiles **
@@ -272,30 +276,19 @@ void set_location_character(unsigned char id)
 // ** Charger un pattern en mémoire    **
 // ======================================
 
-void load_pattern(unsigned int adr_cible,unsigned char *data_charset,unsigned char nb_pattern)
+void set_data_character(unsigned int memory_adresse,unsigned char *data_character,unsigned char nb_pattern)
 {
-  unsigned int nb_octet = nb_pattern<<3;
-  /* unsigned int i;
-    
-    
-    for (i=0;i<nb_octet;i++)
-    {    
-    POKE(adr_cible+i,data_charset[i]);
-    }  
-  */
-  
-  
-  
-  memcpy((char*)adr_cible,(char*)data_charset,nb_octet);
+  unsigned int nb_octet = nb_pattern<<3;  
+  memcpy((char*)memory_adresse,(char*)data_character,nb_octet);
   
 }
 
 // ====================================
 // - Parametrer le pointeur de sprite - 
 // ====================================
-void set_pointeurs_sprites(unsigned char id_sprite,unsigned char id_pointeur)
+void set_sprite_pointers(unsigned char id_sprite,unsigned char value)
 {
-  POKE(G_adr_tilemap+1016+id_sprite,id_pointeur);
+  POKE(G_adr_tilemap+1016+id_sprite,value);
 }
 
 // =====================
@@ -467,17 +460,8 @@ void  set_sprite_color_2(unsigned char  color_id)
 // ************************************************************
 void set_sprite_data(unsigned int adr_cible,unsigned char *adr_data,unsigned char nb_sprite)
 {
-  
   unsigned int nb_octet = nb_sprite<<6;
-  
-  /* unsigned int i;
-    for (i=0;i<nb_octet;i++)
-    {    
-    POKE(adr_cible+i,adr_data[i]);
-    }  
-  */
-  memcpy((char*)adr_cible,(char*)adr_data,nb_octet);
-  
+  memcpy((char*)adr_cible,(char*)adr_data,nb_octet);  
 }
 
 
@@ -492,7 +476,7 @@ void set_scrolling_horizontal(signed char Scroll_X)
 // ----------------------
 // - Scrolling Vertical -
 // ----------------------
-void set_scrolling_verticale(unsigned char Scroll_Y)
+void set_scrolling_vertical(unsigned char Scroll_Y)
 {
   POKE(53265L,(PEEK(53265L)&248)+Scroll_Y);
 }
@@ -568,16 +552,14 @@ unsigned int get_raster(void)
 // ===================
 void wait_vbl(void)
 {
-  
-  waitvsync();
-  
+  waitvsync();  
 }
 
 
 // ==============================================
 // * Généré un nombre pseudo aléatoire du 8bits *
 // ==============================================
-unsigned char get_rnd(unsigned char nombre_max)
+unsigned char get_rnd(unsigned char max_number)
 {
   unsigned char valeur_genere = 0;
   do
@@ -586,15 +568,13 @@ unsigned char get_rnd(unsigned char nombre_max)
     POKE(0xD40F,0xFF);
     POKE(0xD412,0x80);
     valeur_genere = PEEK(0xD41B);
-  } while (valeur_genere > nombre_max);
+  } while (valeur_genere > max_number);
   
   return valeur_genere;
   
 }
 
-// *****************
-// * Fonction Beta *
-// *****************
+
 
 // =========================================
 // * Sauvegarder dans un fichier un buffer *
@@ -635,22 +615,22 @@ void cls_color_ram(unsigned char color)
   memset((char*)REG_COLOR_MAP,color,1000);
 }
 
-void draw_charset_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color)
+void draw_character_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color)
 {
   unsigned char i;
   for (i=0;i<size;i++)
   {
-    draw_full_charset(px+i,py,id_charset,color); 
+    draw_full_character(px+i,py,id_character,color); 
   }
   
 }
 
-void draw_charset_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_charset,unsigned char color)
+void draw_character_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color)
 {
   unsigned char i;
   for (i=0;i<size;i++)
   {
-    draw_full_charset(px,py+i,id_charset,color); 
+    draw_full_character(px,py+i,id_character,color); 
   }
   
 }
@@ -662,9 +642,7 @@ void rle_decrompression(unsigned int source,unsigned int destination)
   unsigned int offset,offset_cible,adr_source;
   offset = 0;
   offset_cible = 0;
-  
-  
-  
+   
   while(PEEK(source+(offset<<1))!=0)
   {
     adr_source = source+(offset<<1);
@@ -675,12 +653,86 @@ void rle_decrompression(unsigned int source,unsigned int destination)
     offset_cible = offset_cible + duplicate;   
     offset++;     
   }
-  
-
-  
-  
+    
 }
 
 
-
-
+void rle_compression(unsigned int source,unsigned int destination,unsigned int size)
+{
+  // -----------------------------
+  // * Declaration des variables *
+  // -----------------------------
+  unsigned char offset_source,offset_cible;
+  unsigned char read_value,nb_value,buffer_value;
+  // ---------------------------
+  // * Initation des variables *
+  // ---------------------------
+  
+  offset_cible = 0;
+  read_value = 0;
+  
+  // ------------------------
+  // * Initiation du 1er octet *
+  // ------------------------
+  offset_source = 1;
+  nb_value = 1;
+  buffer_value = PEEK(source);
+  // ------------------------
+  // * Boucle de la routine *
+  // ------------------------
+  while (offset_source < size)
+  {
+    // ----------------------
+    // * Lecture de l'octet *
+    // ----------------------
+    read_value = PEEK(source+offset_source);
+    
+    // -----------------------------------------------
+    // * Test de l'octet si elle identique au buffer *
+    // -----------------------------------------------
+    if (buffer_value == read_value)
+    {
+      nb_value++;
+    }
+   
+    // ---------------------------
+    // * Octet non identique !!! *
+    // ---------------------------
+    else
+    {
+      // -----------------------------------------
+      // * Ranger en mémoire les deux octets rle *
+      // -----------------------------------------
+      POKE(destination+offset_cible,nb_value);
+      POKE(destination+offset_cible+1,buffer_value);
+    
+      // ---------------------------------
+      // * Modifier l'offset de la cible *
+      // ---------------------------------
+      offset_cible = offset_cible +2;
+    
+      // ----------------------------------------------
+      // * Mise en mémoire buffer de la valeur trouvé *
+      // ----------------------------------------------
+      buffer_value = read_value;
+      
+      // --------------------------
+      // * Remise à 1 du nb_value *
+      // --------------------------
+      nb_value = 1;
+    }
+  
+    // ---------------------------------------
+    // * Modification de l'offset de lecture *
+    // ---------------------------------------
+    offset_source++;
+  
+  }
+  // ------------------------------------------------
+  // * Fin de la routine de compression, ajout du 0 *
+  // ------------------------------------------------
+  POKE(destination+offset_cible,nb_value);
+  POKE(destination+offset_cible+1,buffer_value);
+  POKE(offset_cible+destination+2,0);
+  
+}
