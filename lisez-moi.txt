@@ -14,8 +14,22 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 18/9/2020
+mise à jour le 24/9/2020
 
+======================
+* Changement 0.1.0.0 *
+======================
+Grosse modification des noms de fonctions.
+
+-load_pattern devient set_data_character()
+-draw_full_charset devient draw_full_character
+-draw_charset devient draw_character
+-draw_charsetligne_v (et h) passe en draw_character...
+(note le terme charset est remplacé par character)
+-set_pointeurs_sprites devient set sprite pointers
+- draw_valeur_8 (et 16) devient draw_text_value_8 (et 16)
+- set_pointeur_text devient set_text_pointer()
+- activation de get_adresse_screen_memory
 =======================
 * Changement 0.0.10.0 *
 =======================
