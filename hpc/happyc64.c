@@ -3,7 +3,7 @@
   *******************************************************
   * Role ........... : Entête du sdk                    *
   * Auteur ......... : Jean Monos                       *
-  * Version ........ : V 0.1.0.0                        *
+  * Version ........ : V 0.1.1.0                        *
   * Modification ... : 24/09/2020                       *
   * Licence ........ : Creative Commons by-sa           *
   * Compilateur .... : cc65                             *
@@ -14,6 +14,7 @@
 #include <cbm.h>
 #include <string.h>
 #include <stdio.h>
+#include <errno.h>
 
 // ===============================
 // ** Variable Global de Hapy64 **
@@ -279,8 +280,7 @@ void set_location_character(unsigned char id)
 void set_data_character(unsigned int memory_adresse,unsigned char *data_character,unsigned char nb_pattern)
 {
   unsigned int nb_octet = nb_pattern<<3;  
-  memcpy((char*)memory_adresse,(char*)data_character,nb_octet);
-  
+  memcpy((char*)memory_adresse,(char*)data_character,nb_octet);  
 }
 
 // ====================================
@@ -598,12 +598,17 @@ unsigned char save_file(unsigned char*name,const void* buffer, unsigned int size
 
 unsigned int load_file(const char*name, const void* buffer, unsigned char device)
 {
-  
-  cbm_load (name, device, buffer);
-  return 0;
+  unsigned int error;
+  error = cbm_load (name, device, buffer);
+  return error;
+ 
   
 }
 
+unsigned char get_error(void)
+{
+  return _oserror;
+}
 
 // =========
 // * Tools *

@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.1.0.0                        *
-* Modification ... : 24/09/2020                       *
+* Version ........ : V 0.1.1.0                        *
+* Modification ... : 16/10/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -251,6 +251,11 @@
   
   #define REG_ADR_HAUT_IRQ 0x315
   #define REG_ADR_BASS_IRQ 0x314
+  
+  
+  
+  
+  unsigned char test();
   
   // =============================================
   // * Gestion des interuptions En cours de test *
@@ -859,8 +864,29 @@
        #device : Id du device. 1 pour casette, 8 pour lecteur disquette 1, 9 pour lecteur disquette 2 ... 
        
        Note : Les deux octets du "header" ne sont pas enregistré dans le buffer.
+       Renvois le nombre d'octet chargé. (pour cela que c'est un int)
   */
   unsigned int load_file(const char*name, const void* buffer, unsigned char device);
+  
+  // -------------------------------------------
+  // * Recupere le code erreur d'un chargement *
+  // -------------------------------------------
+      /*
+       1  =   too many files
+       2  =   file open
+       3  =   file not open
+       4  =   file not found
+       5  =   device not present
+       6  =   not input-file
+       7  =   not output-file
+       8  =   missing file-name
+       9  =   illegal device-number
+
+      10  =   STOP-key pushed
+      11  =   general I/O-error
+      */
+  
+  unsigned char get_error(void);
   
   // ---------
   // * Tools *
