@@ -14,7 +14,13 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 24/9/2020
+mise à jour le 16/10/2020
+
+======================
+* Changement 0.1.1.0 *
+======================
+- Ajout de la fonction get_error() qui permet de renvoyer le code d'erreur d'un chargement de fichier.
+- la fonction load_file(...) renvois le nombre d'octet chargé en mémoire. (Si 0 = une erreur)
 
 ======================
 * Changement 0.1.0.0 *
