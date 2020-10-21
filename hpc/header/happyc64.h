@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.1.1.0                        *
-* Modification ... : 16/10/2020                       *
+* Version ........ : V 0.1.2.0                        *
+* Modification ... : 18/10/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -24,11 +24,11 @@
   // ----------------------
   // * Define du joystick *
   // ----------------------
-  #define UP    1<<0
-  #define DOWN  1<<1
-  #define LEFT  1<<2
-  #define RIGHT 1<<3
-  #define FIRE  1<<4
+  #define J_UP    1<<0
+  #define J_DOWN  1<<1
+  #define J_LEFT  1<<2
+  #define J_RIGHT 1<<3
+  #define J_FIRE  1<<4
   
   // ------------------------------------
   // * Les registres libre de la page 0 *
@@ -205,6 +205,9 @@
 	#define KEY_SPC 60 // Espace
 	#define KEY_EMPTY 64 // Pas de touche
 	
+  #define KEY_ANY 64 // N'importe qu'elle touche pour le wait_key
+  
+  
 	// ============================
 	// ** Touches Arithmétiques  **
 	// ============================
@@ -282,8 +285,9 @@
  /*
   Permet d'afficher un text à l'écran.
  */
-  void draw_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color);
+  void draw_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color,unsigned char slow_wait_letter);
   
+  void draw_bloc_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color,unsigned char size_ligne, unsigned char slow_wait_letter);
  // --------------------------------------------------------------------------------------------------- 
  // * void draw_valeur_8 (unsigned char px,unsigned char py,unsigned char valeur,unsigned char color) *
  // ---------------------------------------------------------------------------------------------------
@@ -674,6 +678,13 @@
  
   // ** Récupérer touche du clavier **
   #define get_keyboard_key() PEEK(203L)
+ 
+ 
+  // =========================================
+  // ** Attendre qu'une touche soit presser **
+  // =========================================
+  void wait_key(unsigned char id_key);
+ 
  
   // ================================
   // ** Gestion de la mémoire      **
