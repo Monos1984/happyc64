@@ -14,7 +14,17 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 16/10/2020
+mise à jour le 18/10/2020
+
+
+======================
+* Changement 0.1.2.0 *
+======================
+- Ajout du paramètre slow_wait_letter dans draw_text();
+- Ajout de la fonction draw_bloc_text();
+- Ajout de la fonction wait_key();
+- Les define du joystick débute maintenant par un J_
+
 
 ======================
 * Changement 0.1.1.0 *
@@ -36,6 +46,7 @@ Grosse modification des noms de fonctions.
 - draw_valeur_8 (et 16) devient draw_text_value_8 (et 16)
 - set_pointeur_text devient set_text_pointer()
 - activation de get_adresse_screen_memory
+
 =======================
 * Changement 0.0.10.0 *
 =======================
