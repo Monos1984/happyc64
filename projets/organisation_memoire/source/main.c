@@ -50,14 +50,14 @@ void main()
   // ===================================
   // * Chargement des pattern en $8800 *
   // ===================================
-  load_pattern(0x8800,data_tiles,2); // Mise en mémoire des tiles à l'adresse $8800
+  set_data_character(0x8800,data_tiles,2); // Mise en mémoire des tiles à l'adresse $8800
 
   cls(0); // Effacement de l'écran
   
   // ======================================================================
   // * Exemple Affichage d'un charset avec mise à jour de la color screen *
   // ======================================================================
-  draw_full_charset(10,12,1,5); // On affiche le tile 1, à la position 10-12 avec la couleur numero 5.
+    draw_full_character(10,12,1,5); // On affiche le tile 1, à la position 10-12 avec la couleur numero 5.
 
 
   SCREEN_ON; // On active l'écran.
