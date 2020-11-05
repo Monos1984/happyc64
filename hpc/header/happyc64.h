@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.1.2.0                        *
-* Modification ... : 18/10/2020                       *
+* Version ........ : V 0.1.3.0                        *
+* Modification ... : 05/11/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -46,17 +46,17 @@
   // ====================
   // ** Registres bloc **
   // ====================
-  #define R_VIC     53248l // 0xD000 (Sprites et mémoire video)
+  #define R_VIC     0xD000 // 0xD000 (Sprites et mémoire video)
   #define R_SID     54272l // (Musique)
   #define R_COLOUR  55296l
   #define R_CIA1    53620l 
   #define R_CIA2    56576l
-  #define R_KERNEL  57344l //0xE000  
+  #define R_KERNEL  0xE000 //0xE000  
   
   // ---------
   // * VIC 2 *
   // ----------
-  #define REG_CIA2     56576L
+  #define REG_CIA2     0xDD00
   #define VIC_BANK_0        3   // Adresse $0000 -> $3FFF * Valeur par defaut
   #define VIC_BANK_1        2   // Adresse $4000 -> $7FFF * La Rom Tiles n'est pas dispo.
   #define VIC_BANK_2        1   // Adresse $8000 -> $BFFF
@@ -272,12 +272,12 @@
   // ========================
   
  // ----------------------------------------------------- 
- // *   void set_pointeur_text(unsigned char pointeur)  *
+ // * Pointeur de text *
  // ----------------------------------------------------- 
   /*
     Permet de definir le character lié à l'espace dans la zone des caractères. (Code ASCII)
   */
-  void set_text_pointer(unsigned char pointer);
+  void set_text_pointer(unsigned char pointer); 
   
  // ----------------------------------------------------------------------------------------------- 
  // *  void draw_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color)  *
@@ -315,7 +315,7 @@
   // * get_system() *
   // ----------------
   /*
-    - Permet de system si le C64 est en mode pal(1) ou ntsc(1)
+    - Retourne le type de processeur. pal(1) ou ntsc(1)
   */
   
   unsigned char get_system();
@@ -353,7 +353,7 @@
  int get_adresse_screen_memory();
   
   // --------------------------------------------------------------------
-  // * load_pattern(adresse cible , adresse source , nombre de pattern) *
+  // * set_data_character(adresse cible , adresse source , nombre de pattern) *
   // --------------------------------------------------------------------
   /* Permet de mémoriser dans le C64 les données des pattern des tiles à  l'endroit voulu */
   void set_data_character(unsigned int memory_adresse,unsigned char *data_character,unsigned char nb_pattern);
@@ -680,6 +680,13 @@
   #define get_keyboard_key() PEEK(203L)
  
  
+  // ** Desactiver la touche shift **
+  #define set_shift_off() POKE(657,128)
+  
+  // ** Active la touche shift
+  #define set_shift_on() POKE(657,0)
+ 
+ 
   // =========================================
   // ** Attendre qu'une touche soit presser **
   // =========================================
@@ -787,7 +794,10 @@
   // * Générateur aléatoire de nombre sur 1 octet *
   // ==============================================
    unsigned char get_rnd(unsigned char max_number);
-  
+  // ==============================================
+  // * Générateur aléatoire de nombre sur 2 octet *
+  // ==============================================
+   unsigned int get_rnd16(unsigned int max_number);
   
   // ===================
   // * Gestion Mémoire *
@@ -917,5 +927,23 @@
  */ 
   void rle_decrompression(unsigned int source,unsigned int destination);
   void rle_compression(unsigned int source,unsigned int destination,unsigned int size);
+  
+  
+  // ===================================
+  // * REU Extensention memoire : Bêta *
+  // ===================================
+  
+  // * Define pour le start dma *
+  #define MODE_C64_REU  0b10010000
+  #define MODE_REU_C64  0b10010001
+  #define MODE_SWAP     0b10010010
+  
+  
+  void reu_set_adresse_c64(unsigned int adresse);
+  void reu_set_adresse_reu(unsigned int adresse,unsigned char id_bank);
+  void reu_set_size(unsigned int size);
+  void reu_start_dma(unsigned char value);
+  
+  
   
 #endif

@@ -3,8 +3,8 @@
   *******************************************************
   * Role ........... : Entête du sdk                    *
   * Auteur ......... : Jean Monos                       *
-  * Version ........ : V 0.1.2.0                        *
-  * Modification ... : 18/10/2020                       *
+  * Version ........ : V 0.1.3.0                        *
+  * Modification ... : 05/11/2020                       *
   * Licence ........ : Creative Commons by-sa           *
   * Compilateur .... : cc65                             *
 *******************************************************/
@@ -714,7 +714,30 @@ unsigned char get_rnd(unsigned char max_number)
   
 }
 
-
+// =================================================
+// * Généré un nombre pseudo aléatoire sur 16 bits *
+// =================================================
+unsigned int get_rnd16(unsigned int max_number)
+{
+   unsigned char valeur_genere_a = 0;
+   unsigned char valeur_genere_b = 0;
+  do
+  {
+    POKE(0xD40E,0xFF);
+    POKE(0xD40F,0xFF);
+    POKE(0xD412,0x80);
+    valeur_genere_a = PEEK(0xD41B);
+    
+    POKE(0xD40E,0xFF);
+    POKE(0xD40F,0xFF);
+    POKE(0xD412,0x80);
+  valeur_genere_b = PEEK(0xD41B) + (valeur_genere_a<<8) ;
+ 
+ } while (valeur_genere_b > max_number);
+  
+  return valeur_genere_b;
+  
+}
 
 // =========================================
 // * Sauvegarder dans un fichier un buffer *
@@ -760,14 +783,16 @@ void cls_color_ram(unsigned char color)
   memset((char*)REG_COLOR_MAP,color,1000);
 }
 
+// =============================================
+// * Afficher une ligne avec le même character *
+// =============================================
 void draw_character_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color)
 {
-  unsigned char i;
-  for (i=0;i<size;i++)
-  {
-    draw_full_character(px+i,py,id_character,color); 
-  }
+  unsigned int offset_start = py*40+px;
+  memset((char*)REG_COLOR_MAP+offset_start,color,size);
+  memset((char*)G_adr_tilemap+offset_start,id_character,size);
   
+ 
 }
 
 void draw_character_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color)
@@ -881,3 +906,27 @@ void rle_compression(unsigned int source,unsigned int destination,unsigned int s
   POKE(offset_cible+destination+2,0);
   
 }
+
+
+
+  // ================
+  // * REU Fonction *
+  // ================
+  void reu_set_adresse_c64(unsigned int adresse)
+  {
+    POKEW(0xDF02,adresse);
+  }
+  
+  void reu_set_adresse_reu(unsigned int adresse,unsigned char id_bank)
+  {
+    POKEW(0xDF04,adresse);
+    POKE(0xDF06,id_bank);
+  }
+  void reu_set_size(unsigned int size)
+  {
+    POKEW(0xDF07,size);
+  }
+  void reu_start_dma(unsigned char value)
+  {
+    POKE(0xDF01,value);
+  }
