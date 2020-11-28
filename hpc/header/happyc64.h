@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.1.3.0                        *
-* Modification ... : 05/11/2020                       *
+* Version ........ : V 0.1.4.0                        *
+* Modification ... : 28/11/2020                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -87,7 +87,7 @@
   // * Les registres video *
   // ----------------------- 
   
-  #define REG_SCREEN_MEMORY_PT         53272L // Registre du pointeur du Screen Memory
+  #define REG_SCREEN_MEMORY_PT         0xD018 // Registre du pointeur du Screen Memory
   #define REG_COLOR_BORDER             53280L // Registre pour modifier la couleur du BORDER
 	#define REG_COLOR_BACKGROUND         53281L // Registre pour modifier la couleur du PAPER
   #define REG_COLOR_BACKGROUND_1       53282L // Registre pour modifier la couleur du PAPER
@@ -308,8 +308,8 @@
   // ** Les Fonctions Video       **
   // ===============================
   
-  #define SCREEN_ON   POKE(53265L,PEEK(53265L)|16)  // Allumage de l'écran
-  #define SCREEN_OFF  POKE(53265L,PEEK(53265L)&239) // Eteindre l'écran
+  #define SCREEN_ON   POKE(0xD011,PEEK(0xD011)|16)  // Allumage de l'écran
+  #define SCREEN_OFF  POKE(0xD011,PEEK(0xD011)&239) // Eteindre l'écran
   
   // ----------------
   // * get_system() *
@@ -432,7 +432,7 @@
     - Permet d'activer le mode BIT MAP.
     
   */
-  #define SET_STANDARD_HIGHT_RESOLUTION_BMM_ON  POKE(532650L,(PEEK(53265L)  |32 ));
+  #define SET_STANDARD_HIGHT_RESOLUTION_BMM_ON  POKE(0xD011,(PEEK(0xD011)  |32 )); 
   
   // -----------------------------------------------------
   // * SET_STANDARD_HIGHT_RESOLUTION_BMM_OFF *
@@ -544,7 +544,7 @@
     # color : Numero de la couleur
   */
   void cls_color_ram(unsigned char color);
-  
+   
   // ================================
   // ** Configuration video       **
   // ================================
@@ -734,8 +734,16 @@
   // * set_interruption_off()              *
   // ---------------------------------------
   /* Desavtive (off)/Reactive (on) les interruptions*/
-  #define set_interruption_on()  POKE(56334L,PEEK(56334L)|1) 
+ 
+   #define set_interruption_on()  POKE(0xDC0D,129) 
+   #define set_interruption_off() POKE(0xDC0D,127)
+ 
+ 
+ /*
+  #define set_interruption_on() POKE(56334L,PEEK(56334L)|1) 
   #define set_interruption_off() POKE(56334L,PEEK(56334L)&254)
+ */ 
+  
   
   // ==================================
   // * Gestion du SID pour la musique *
@@ -825,7 +833,7 @@
   #define POKE(addr,val)     (*(unsigned char*) (addr) = (val))
   
  
- // ---------------------------------------
+  // ---------------------------------------
   // * PEEKW(addr)                          *
   // ---------------------------------------
   /* 
@@ -845,6 +853,27 @@
   */
   
   #define POKEW(addr,val)     (*(unsigned int*) (addr) = (val))
+  
+  // ------------------------------------------
+  // * get_bit(numero du bit,valeur à tester) *
+  // ------------------------------------------
+  /*
+    -Permet de lire l'état d'un bit dans un octet.
+    # id_bit : Numeros du bit à tester.
+    # value  ; Nombre à tester. 
+  */
+  unsigned char get_bit(unsigned char id_bit,unsigned char value);
+ 
+ 
+  // ---------------------------------------------
+  // * set_bit(numero du bit, valeur à modifier) *
+  // ---------------------------------------------
+  unsigned char set_bit(unsigned char id_bit, unsigned char value);
+  
+  // =============================================
+// * set_bit(numero du bit, valeur à modifier) *
+// =============================================
+unsigned char unset_bit(unsigned char id_bit, unsigned char value);
   
  
   // ========================  

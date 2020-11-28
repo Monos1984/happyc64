@@ -1,20 +1,20 @@
-/******************************************************
-  ********              Happy C64            *************
+ /********************************************************
+  ********              Happy C64            ************
   *******************************************************
   * Role ........... : Entête du sdk                    *
   * Auteur ......... : Jean Monos                       *
-  * Version ........ : V 0.1.3.0                        *
-  * Modification ... : 05/11/2020                       *
+  * Version ........ : V 0.1.4.0                        *
+  * Modification ... : 28/11/2020                       *
   * Licence ........ : Creative Commons by-sa           *
   * Compilateur .... : cc65                             *
-*******************************************************/
-
+  ******************************************************* */ 
 
 #include <happyc64.h>
 #include <cbm.h>
 #include <string.h>
 #include <stdio.h>
 #include <errno.h>
+
 
 // ===============================
 // ** Variable Global de Hapy64 **
@@ -286,7 +286,6 @@ void set_color_background_2(unsigned char color_id)
   POKE(REG_COLOR_BACKGROUND_2 ,color_id);
 }
 
-
 // =========================================
 // ** Modifier la couleur du background_3 **
 // =========================================
@@ -301,19 +300,17 @@ void set_color_background_3(unsigned char color_id)
 // ** Effacer l'écran **
 // =====================
 void cls(unsigned char id_tiles)
-{
-  
-  
-  memset((char*)G_adr_tilemap,id_tiles,1000);
-  
+{ 
+  memset((char*)G_adr_tilemap,id_tiles,1000); 
 }
 
-// =======================================
+// =========================================
 // ** Afficher un character à l'ecran     **
-// =======================================
+// =========================================
 
 void draw_full_character(unsigned char position_x, unsigned char position_y, unsigned char id_character, unsigned char color_id)
 {
+  // Position Y * 40 + position X
   unsigned int calcule_adresse;
   calcule_adresse = (position_y<<5) + (position_y<<3)+position_x;
   
@@ -787,12 +784,10 @@ void cls_color_ram(unsigned char color)
 // * Afficher une ligne avec le même character *
 // =============================================
 void draw_character_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color)
-{
+{ 
   unsigned int offset_start = py*40+px;
   memset((char*)REG_COLOR_MAP+offset_start,color,size);
   memset((char*)G_adr_tilemap+offset_start,id_character,size);
-  
- 
 }
 
 void draw_character_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color)
@@ -930,3 +925,31 @@ void rle_compression(unsigned int source,unsigned int destination,unsigned int s
   {
     POKE(0xDF01,value);
   }
+  
+// ******************  
+// * Gestion de bit *
+// ******************
+
+// =============
+// * get_bit() *
+// =============
+unsigned char get_bit(unsigned char id_bit,unsigned char value)
+{
+  return value = (value >> id_bit)&0b00000001;
+}
+
+// =============================================
+// * set_bit(numero du bit, valeur à modifier) *
+// =============================================
+unsigned char set_bit(unsigned char id_bit, unsigned char value)
+{
+    return value = value |(1<<id_bit);
+}
+
+// =============================================
+// * set_bit(numero du bit, valeur à modifier) *
+// =============================================
+unsigned char unset_bit(unsigned char id_bit, unsigned char value)
+{
+    return value = value &(~(1<<id_bit));
+}
