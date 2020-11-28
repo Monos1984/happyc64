@@ -14,14 +14,22 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 05/11/2020
+mise à jour le 28/11/2020
+
+======================
+* Changement 0.1.4.0 *
+======================
+Ajout de trois fonction pour tester un bit dans un octet.
+- get_bit(id,value)
+- set_bit(id,value)
+- unset_bit(id,value)
 
 ======================
 * Changement 0.1.3.0 *
 ======================
 - ajout de commande pour utiliser une extension REU simplement
 - amélioration interne de la fonction draw_character_line_H()
-- Ajout deget_rnd16(max_number)
+- Ajout de get_rnd16(max_number)
 - Ajout de set_shift_off()
 - Ajout de set_shift_on()
 
