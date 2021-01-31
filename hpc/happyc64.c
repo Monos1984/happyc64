@@ -3,8 +3,8 @@
   *******************************************************
   * Role ........... : Entête du sdk                    *
   * Auteur ......... : Jean Monos                       *
-  * Version ........ : V 0.1.4.0                        *
-  * Modification ... : 28/11/2020                       *
+  * Version ........ : V 0.1.5.0                        *
+  * Modification ... : 31/01/2021                       *
   * Licence ........ : Creative Commons by-sa           *
   * Compilateur .... : cc65                             *
   ******************************************************* */ 
@@ -20,6 +20,7 @@
 // ** Variable Global de Hapy64 **
 // ===============================
 unsigned int  G_adr_tilemap = 1024l;
+unsigned int  G_pointeur_pattern;
 unsigned char buffer_vic_bank = 0;
 unsigned char buffer_id_screen = 16;
 unsigned char text_pointeur=0;
@@ -27,6 +28,15 @@ unsigned char text_pointeur=0;
 unsigned char buffer_8[8];
 unsigned char buffer_16[16];
 
+// =================
+// * Data case adr *
+// =================
+const unsigned int adr_case[]=
+{
+0,40,80,120,160,200,240,280,320,360,
+400,440,480,520,560,600,640,680,720,760,
+800,840,880,920,960,
+};
 
 /*
   
@@ -312,7 +322,9 @@ void draw_full_character(unsigned char position_x, unsigned char position_y, uns
 {
   // Position Y * 40 + position X
   unsigned int calcule_adresse;
-  calcule_adresse = (position_y<<5) + (position_y<<3)+position_x;
+  // calcule_adresse = (position_y<<5) + (position_y<<3)+position_x;
+  
+  calcule_adresse=adr_case[position_y]+position_x;
   
   POKE(G_adr_tilemap+calcule_adresse,id_character);
   POKE(REG_COLOR_MAP+calcule_adresse,color_id);
@@ -322,17 +334,59 @@ void draw_full_character(unsigned char position_x, unsigned char position_y, uns
 void draw_character(unsigned char position_x, unsigned char position_y, unsigned char id_character)
 {
   
-  POKE(G_adr_tilemap+position_x+40*position_y,id_character);
-  
+//  POKE(G_adr_tilemap+position_x+40*position_y,id_character);
+  POKE(G_adr_tilemap+position_x+adr_case[position_y],id_character);
 }
 
 
 void set_color_map(unsigned char position_x, unsigned char position_y, unsigned char color_id)
 {
   
-  POKE(REG_COLOR_MAP+position_x+40*position_y,color_id);
+  POKE(REG_COLOR_MAP+position_x+adr_case[position_y],color_id);
 }
 
+
+// ==============
+// * draw pixel *
+// ==============
+void draw_pixel(unsigned int px, unsigned int py)
+{
+    unsigned int adr,py2;
+    py2 = (py>>3);
+    adr=(buffer_vic_bank<<14)+G_pointeur_pattern+((py2)<<8)+((py2)<<6) +((px>>3)<<3)+(py&7);  
+    POKE(adr,PEEK(adr)|pow(2,7-(px&7)  ));
+}
+
+// ========================
+// * Set_bitmap_color_map *
+// ========================
+void set_bitmap_color_map(unsigned char px, unsigned char py, unsigned char color_ink,unsigned char color_background)
+{
+  POKE(G_adr_tilemap+py*40+px,color_ink*16+color_background);
+}
+  
+// =============
+// * Puissance *
+// =============
+unsigned int pow(unsigned int value, unsigned int power)
+{
+  unsigned int resultat,i;
+  resultat = 1;
+  
+ if (power > 0)
+ {
+  for (i=1;i<power+1;i++)
+  {
+    resultat = resultat * value;
+  } 
+ 
+ }
+ else
+ {
+  resultat = 1;
+ }
+  return resultat;
+}
 
 // =======================================
 // ** Selectionner la Bank du vic 2     **
@@ -366,6 +420,7 @@ void set_vic_bank(unsigned char id_bank)
   G_adr_tilemap = (buffer_id_screen<<6)+(buffer_vic_bank<<14);
   
 }
+
 
 // =================================================
 // ** Selectionner l'adresse du screen memory     **
@@ -407,6 +462,7 @@ void set_adresse_tilemap(unsigned int adresse)
 void set_location_character(unsigned char id)
 {
   POKE(53272L,(PEEK(53272L)& 240) | id); // Selection de la bank.
+  G_pointeur_pattern = id*0x400;
 }
 
 
@@ -780,6 +836,18 @@ void cls_color_ram(unsigned char color)
   memset((char*)REG_COLOR_MAP,color,1000);
 }
 
+
+
+void cls_bitmap_color_ram(unsigned char ink_color,unsigned char background_color)
+{
+   memset((char*)G_adr_tilemap,ink_color*16+background_color,0x400);
+}
+
+void cls_bitmap()
+{
+  memset((char*)((buffer_vic_bank<<14)+G_pointeur_pattern),0,8000);
+}
+
 // =============================================
 // * Afficher une ligne avec le même character *
 // =============================================
@@ -953,3 +1021,5 @@ unsigned char unset_bit(unsigned char id_bit, unsigned char value)
 {
     return value = value &(~(1<<id_bit));
 }
+
+

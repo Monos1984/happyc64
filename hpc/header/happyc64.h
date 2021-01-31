@@ -4,7 +4,7 @@
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
 * Version ........ : V 0.1.4.0                        *
-* Modification ... : 28/11/2020                       *
+* Modification ... : 31/01/2021                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -429,7 +429,7 @@
   // * SET_STANDARD_HIGHT_RESOLUTION_BMM_ON *
   // -----------------------------------------------------
   /*
-    - Permet d'activer le mode BIT MAP.
+    - Permet d'activer le mode BIT MAP. (53265)
     
   */
   #define SET_STANDARD_HIGHT_RESOLUTION_BMM_ON  POKE(0xD011,(PEEK(0xD011)  |32 )); 
@@ -536,6 +536,10 @@
   void set_color_map(unsigned char position_x, unsigned char position_y,unsigned char color_id);
   
   
+  
+  void set_bitmap_color_map(unsigned char px, unsigned char py, unsigned char color_ink,unsigned char color_background);
+  
+  
   // -------------------------------------------
   // * void cls_color_ram(unsigned char color) *
   // -------------------------------------------
@@ -544,7 +548,8 @@
     # color : Numero de la couleur
   */
   void cls_color_ram(unsigned char color);
-   
+  void cls_bitmap_color_ram(unsigned char ink_color,unsigned char background_color); 
+  void cls_bitmap();
   // ================================
   // ** Configuration video       **
   // ================================
@@ -943,7 +948,8 @@ unsigned char unset_bit(unsigned char id_bit, unsigned char value);
   // ---------
   void draw_character_line_V(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color);
   void draw_character_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color);
- 
+  
+  unsigned int pow(unsigned int value, unsigned int power);
  // ----------------------
  // * rle_decrompression *
  // ----------------------
@@ -973,6 +979,8 @@ unsigned char unset_bit(unsigned char id_bit, unsigned char value);
   void reu_set_size(unsigned int size);
   void reu_start_dma(unsigned char value);
   
-  
-  
+  // ===================
+  // * Bitmap Fonction *
+  // ===================
+  void draw_pixel(unsigned int px, unsigned int py);
 #endif
