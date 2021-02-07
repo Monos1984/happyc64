@@ -23,6 +23,11 @@ name_d64=demodd.d64
 # -----------------
 OUT=bin
 
+# -------------------
+# Dossier Code source 
+# -------------------
+SOURCE= $(CURDIR)/source
+
 # ------------------------------------
 # Dossier des datas seq et prg externe
 #--------------------------------------
@@ -39,7 +44,7 @@ CC = $(CURDIR)/../../cc65/bin/cl65.exe
 create_d64= $(CURDIR)/../../outils/cc1541/cc1541.exe
 
 ADROUT=$(CURDIR)/$(OUT)
-SOURCE= $(CURDIR)/source
+
 HAPPY=$(CURDIR)/../../hpc
 CRULE=-o $(ADROUT)/$(NAME).prg -u __EXEHDR__  -O -t c64 --include-dir $(HAPPY)/header 
 CFILES := $(sort $(wildcard $(SOURCE)/*.c))
