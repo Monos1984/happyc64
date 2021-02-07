@@ -1,0 +1,26 @@
+=====================
+* Makefile HappyC64 *
+=====================
+version 1.0.0 du 07.02/21
+
+---------------
+* Préparation *
+---------------
+Le dossier makefile dans outils comprend le lisez moi que vous êtes en train de lire. (enfin normalement), le logiciel make.exe, le fichier Makefile et le make.bat
+
+Copier et coller à la racine de votre projet les deux fichiers make.bat et Makefile. Le make.exe reste ici.
+
+Pour lancer la compilation manuel, vous devez cliquer sur make.bat de votre projet.
+
+-----------------
+* Configuration *
+-----------------
+Le makefile possède un espace de configuration.
+
+NAME : Le nom de votre programme en sortie. l'extenssion .prg sera ajouté automatiquement.
+
+OUT : le dossier ou ba se créer le prg généré et le .d64
+
+dossier_data : le dossier ou se placerons vos fichier extern prg et sql si vous en utiliser.
+
+Il existe d'autre variable de configuration comme le lien de cl65, de cc1541, de la lib happyc64... utile à re configurer si vous chamboulé l'organisation par défaut des dossier.
