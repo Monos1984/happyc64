@@ -1,4 +1,4 @@
-=====================
+﻿=====================
 * Makefile HappyC64 *
 =====================
 version 1.0.0 du 07.02/21
@@ -22,5 +22,7 @@ NAME : Le nom de votre programme en sortie. l'extenssion .prg sera ajouté autom
 OUT : le dossier ou ba se créer le prg généré et le .d64
 
 dossier_data : le dossier ou se placerons vos fichier extern prg et sql si vous en utiliser.
+
+SOURCE : le dossier ou se trouve votre code source. (Garder le $(CURDIR))
 
 Il existe d'autre variable de configuration comme le lien de cl65, de cc1541, de la lib happyc64... utile à re configurer si vous chamboulé l'organisation par défaut des dossier.
