@@ -33,9 +33,9 @@ SOURCE= $(CURDIR)/source
 #--------------------------------------
 dossier_data = data
 
-# ===============================================================
-# Autre configuration ou pas touche a cela petit con si tu debute
-# ===============================================================
+# ================================================================
+# Autre configuration ou pas touche a cela petit con si tu debutes
+# ================================================================
 
 # -----------------------------
 # Adresse divers pre configurer 
