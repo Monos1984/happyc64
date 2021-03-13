@@ -14,7 +14,13 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 11/03/2021
+mise à jour le 13/03/2021
+
+======================
+* Changement 0.2.0.0 *
+======================
+- Mise à jour du code source de la librairie. Le code source est séparé par theme.
+- Diminution de la taille du programme dans la plupars des cas.  
 
 ======================
 * Changement 0.1.5.1 *
