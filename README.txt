@@ -14,7 +14,12 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 14/03/2021
+mise à jour le 7/04/2021
+
+======================
+* Changement 0.2.1.1 *
+======================
+- Correction sur la fonction draw_sprite().
 
 ======================
 * Changement 0.2.1.0 *
