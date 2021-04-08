@@ -14,7 +14,12 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 7/04/2021
+mise à jour le 8/04/2021
+
+======================
+* Changement 0.2.2.0 *
+======================
+- Activation de la fonction init_adr_irq();
 
 ======================
 * Changement 0.2.1.1 *
