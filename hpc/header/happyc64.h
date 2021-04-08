@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.2.0.0                        *
-* Modification ... : 13/03/2021                       *
+* Version ........ : V 0.2.2.0                        *
+* Modification ... : 8/04/2021                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -260,12 +260,11 @@
   
   unsigned char test();
   
-  // =============================================
-  // * Gestion des interuptions En cours de test *
-  // =============================================
- //  void init_adr_irq(unsigned int adresse);
-  
-  
+  // ============================
+  // * Gestion des interuptions *
+  // ============================
+  void init_adr_irq(unsigned int adresse);
+  #define end_fonction_irq() __asm__("jmp $ea31")
   
   // ========================
   // ** Les Fonctions Text **
@@ -739,13 +738,7 @@
   /* Desavtive (off)/Reactive (on) les interruptions*/
  
    #define set_interruption_on()  POKE(0xDC0D,129) 
-   #define set_interruption_off() POKE(0xDC0D,127)
- 
- 
- /*
-  #define set_interruption_on() POKE(56334L,PEEK(56334L)|1) 
-  #define set_interruption_off() POKE(56334L,PEEK(56334L)&254)
- */ 
+   #define set_interruption_off() POKE(0xDC0D,127) 
   
   
   // ==================================
