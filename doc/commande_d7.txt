@@ -1,0 +1,43 @@
+=====================================================
+* Commande basic utile pour le lecteur de disquette *
+=====================================================
+Voici des commandes utiles à savoir pour gérer le lecteur de disquette 1541
+Notons que dans mes exemples vous allez retrouver la valeur 8.
+Mais cette valeur peux changer en fonction si c'est votre premier lecteur de disquette branché (8), le 2nd(9), le troisième (10)...
+La commande load  se compose comme ceci :
+
+load "nom du fichier",numero du peripherique,adresse.
+
+Par défaut j'utilise le peripherique 8
+
+
+-------------------------------------------
+* Charger le premier programme en mémoire *
+-------------------------------------------
+load "*",8,1 
+
+----------------------------------------
+* Charger le fichier "prog" en mémoire *
+----------------------------------------
+load "prog",8,1
+
+-----------------------
+* Lancer le programme *
+-----------------------
+run
+
+-------------------------------------------------
+* Charger le contenu de la disquette en mémoire *
+-------------------------------------------------
+load"$",8
+
+-------------------------------------------------------
+* Lister le contenue de la disquette après chargement *
+-------------------------------------------------------
+list
+
+--------------------------
+* Formater une disquette *
+--------------------------
+OPEN 15,8,15:PRINT#15,"NEW:NOM,2A":CLOSE 15
+
