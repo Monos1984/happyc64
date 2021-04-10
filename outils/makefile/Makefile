@@ -1,8 +1,33 @@
 # ===========================
 # Makefile Happy C64
 # par Jean Monos
-# version 1.0 du 7/02/2021
+# version 1.1 du 10/04/2021
 # ===========================
+
+# ====================
+# Lancer le makefile #
+# ====================
+
+# -----------------------------------------
+# ..\..\outils\makefile\make
+# Compilation simple du programme.prg
+# -----------------------------------------
+
+# -----------------------------------------
+# ..\..\outils\makefile\make FLOPPY
+# Compilation prg + D7
+# -----------------------------------------
+
+# -----------------------------------------
+# ..\..\outils\makefile\make tap
+# Compilation prg + tap
+# -----------------------------------------
+
+# -----------------------------------------
+# ..\..\outils\makefile\make floptap
+# Compilation prg + tap + d7
+# -----------------------------------------
+
 
 # ================================
 # Configuration Manuel du makefile 
@@ -11,12 +36,17 @@
 # ----------------
 # Nom du programme
 # ---------------- 
-NAME=demo
+NAME=exemple
 
 # ------------------
 # Nom de la diquette
 # ------------------
-name_d64=demodd.d64
+name_d64=exemple.d64
+
+# -----------------
+# Nom de la casette
+# -----------------
+name_tape=exemple.tap
 
 # -----------------
 # Dossier de sortie
@@ -42,6 +72,8 @@ dossier_data = data
 # -----------------------------
 CC = $(CURDIR)/../../cc65/bin/cl65.exe 
 create_d64= $(CURDIR)/../../outils/cc1541/cc1541.exe
+create_tape= $(CURDIR)/../../outils/waw-prg/prg2wav.exe
+
 
 ADROUT=$(CURDIR)/$(OUT)
 
@@ -63,8 +95,10 @@ DATAPRG = $(DATAFILESPRG:.prg=)
 # Luncher du makefile 
 # -------------------
 .PHONY: all
-all:  introduction clean_bin compilation d64
-
+all:  introduction clean_bin compilation 
+floppy:  introduction clean_bin compilation d64
+tap:  introduction clean_bin compilation tape
+floptap:  introduction clean_bin compilation d64 tape
 # ========================
 # Introduction du makefile 
 # ========================
@@ -124,3 +158,9 @@ d64:
 		echo $$fileprg;\
 		$(create_d64) -f $$fileprg -T PRG   -w $(CURDIR)/$(dossier_data)/$$fileprg.prg   -n $(NAME) $(ADROUT)/$(name_d64) ;\
 	done	
+  
+tape:
+	@echo ----------------
+	@echo = Fichier TAPE =
+	@echo ----------------
+	@$(create_tape) -t $(ADROUT)/$(name_tape) $(ADROUT)/$(NAME).prg

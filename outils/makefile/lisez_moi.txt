@@ -1,7 +1,7 @@
 ﻿=====================
 * Makefile HappyC64 *
 =====================
-version 1.0.0 du 07.02/21
+version 1.1 du 10.04/21
 
 ---------------
 * Préparation *
@@ -10,7 +10,19 @@ Le dossier makefile dans outils comprend le lisez moi que vous êtes en train de
 
 Copier et coller à la racine de votre projet les deux fichiers make.bat et Makefile. Le make.exe reste ici.
 
-Pour lancer la compilation manuel, vous devez cliquer sur make.bat de votre projet.
+Pour lancer la compilation manuel, vous devez cliquer sur make.bat de votre projet. note : Il existe 4 configuration.
+
+- make  
+lance la compilation avec seulement le prg
+
+- make floppy
+permet de créer une disquette
+
+- make tap
+permet de créer une casette
+
+- make floptap
+permet de créer une disquette et une casette
 
 -----------------
 * Configuration *
