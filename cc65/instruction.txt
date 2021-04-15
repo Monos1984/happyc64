@@ -1,2 +1,0 @@
-télécharger et placer cc65 à la racine de ce dossier
-https://sourceforge.net/projects/cc65/files/cc65-snapshot-win32.zip/download
