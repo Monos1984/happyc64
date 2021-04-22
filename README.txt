@@ -14,7 +14,21 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 8/04/2021
+mise à jour le 22/04/2021
+
+
+======================
+* Changement 0.2.3.5 *
+======================
+- Correction dans le header de la fonction set_sprite_multicolore_on()
+- Ajout de fonction pour gérer le paddle. (Bêta et non documenté)
+
+
+======================
+* Changement 0.2.3.0 *
+======================
+- Ajout de la fonction get_color_map(...)
+- Ajout de la fonction get_id_character(...) 
 
 ======================
 * Changement 0.2.2.0 *
