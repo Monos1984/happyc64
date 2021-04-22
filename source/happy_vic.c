@@ -62,6 +62,17 @@ void draw_character_line_H(unsigned char px,unsigned char py,unsigned char size,
   memset((char*)G_adr_tilemap+offset_start,id_character,size);
 }
 
+// =======================
+// * Recuperer l'id tile *
+// =======================
+unsigned char get_id_character(unsigned char position_x,unsigned char position_y)
+{
+  unsigned char id;
+  id = PEEK(G_adr_tilemap+position_x+adr_case[position_y]);
+  return id;
+}
+
+
 // ===========================================================
 // * Afficher une ligne avec le même character en Vertical   *
 // ===========================================================
@@ -82,6 +93,18 @@ void draw_character_line_V(unsigned char px,unsigned char py,unsigned char size,
 void set_color_map(unsigned char position_x, unsigned char position_y, unsigned char color_id)
 { 
   POKE(REG_COLOR_MAP+position_x+adr_case[position_y],color_id);
+}
+
+
+// ======================================
+// * Recupérer la couleur de la cellule *
+// ======================================
+unsigned char get_color_map(unsigned char position_x, unsigned char position_y)
+{
+  unsigned char id;
+  id = PEEK(REG_COLOR_MAP+position_x+adr_case[position_y]);
+  return id;
+  
 }
 
 // =======================================

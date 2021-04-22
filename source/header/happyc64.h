@@ -523,6 +523,11 @@
   */ 
   void draw_character(unsigned char position_x, unsigned char position_y, unsigned char id_character);
   
+  // ------------------
+  // * get_id_charset *
+  // ------------------
+  unsigned char get_id_character(unsigned char position_x,unsigned char position_y);
+  
   // --------------------------------------------------------------------------------------------
   // * set_color_map(unsigned char position_x, unsigned char position_y,unsigned char color_id) *
   // --------------------------------------------------------------------------------------------
@@ -535,6 +540,7 @@
   void set_color_map(unsigned char position_x, unsigned char position_y,unsigned char color_id);
   
   
+  unsigned char get_color_map(unsigned char position_x, unsigned char position_y);
   
   void set_bitmap_color_map(unsigned char px, unsigned char py, unsigned char color_ink,unsigned char color_background);
   
@@ -868,9 +874,9 @@
   unsigned char set_bit(unsigned char id_bit, unsigned char value);
   
   // =============================================
-// * set_bit(numero du bit, valeur à modifier) *
-// =============================================
-unsigned char unset_bit(unsigned char id_bit, unsigned char value);
+  // * set_bit(numero du bit, valeur à modifier) *
+  // =============================================
+  unsigned char unset_bit(unsigned char id_bit, unsigned char value);
   
  
   // ========================  
@@ -975,4 +981,12 @@ unsigned char unset_bit(unsigned char id_bit, unsigned char value);
   // * Bitmap Fonction *
   // ===================
   void draw_pixel(unsigned int px, unsigned int py);
+  
+  
+  // ==========
+  // * Paddle *
+  // ==========
+  unsigned char get_paddle(unsigned char port,unsigned char id_paddle);
+  unsigned char get_paddle_fire(unsigned char port,unsigned char id_paddle);
+  
 #endif
