@@ -1,7 +1,8 @@
 **************************************
 ***            Happy C64           ***
 **************************************
-Librairie de fonction en C pour programmer le commodore 64 avec le compilateur CC64
+Librairie de fonction en C pour programmer le commodore 64 avec le compilateur CC65
+Ecrit par Loïc Lété (Jean Monos)
 
 =========================
 * Licence d'utilisation *
@@ -17,12 +18,15 @@ Librairie de fonction en C pour programmer le commodore 64 avec le compilateur C
 mise à jour le 22/04/2021
 
 
+===============================================
+============= Version 0.2.x.x =================
+===============================================
+
 ======================
 * Changement 0.2.3.5 *
 ======================
 - Correction dans le header de la fonction set_sprite_multicolore_on()
 - Ajout de fonction pour gérer le paddle. (Bêta et non documenté)
-
 
 ======================
 * Changement 0.2.3.0 *
@@ -52,6 +56,10 @@ mise à jour le 22/04/2021
 - Mise à jour du code source de la librairie. Le code source est séparé par theme.
 - Diminution de la taille du programme dans la plupars des cas.  
 
+===============================================
+============= Version 0.1.x.x =================
+===============================================
+
 ======================
 * Changement 0.1.5.1 *
 ======================
@@ -65,6 +73,7 @@ Ajout de fonction pour manipuler le mode bitmap
 - Void set_bitmap_color_map(unsigned char px, unsigned char py, unsigned char color_ink, unsigned char color_background)
 - Void cls_bitmap_color_ram(unsigned char ink_color,unsigned char background_color)
 - Void cls_bitmap()
+
 ======================
 * Changement 0.1.4.0 *
 ======================
@@ -112,11 +121,15 @@ Grosse modification des noms de fonctions.
 - set_pointeur_text devient set_text_pointer()
 - activation de get_adresse_screen_memory
 
+
+===============================================
+============= Version 0.0.x.x =================
+===============================================
+
 =======================
 * Changement 0.0.10.0 *
 =======================
 - Ajout de la fonction void rle_decompression(); qui permet de decompresser des datas en mode RLE.
-
 
 ----------------------
 * Changement 0.0.9.0 *
@@ -133,8 +146,6 @@ Grosse modification des noms de fonctions.
 ----------------------
 * Changement 0.0.7.0 *
 ----------------------
-
-
 - Ajout de la fonction draw_text();
 - Ajout de la fonction set_pointeur_text();
 - Ajout de la fonction draw_valeur_16() et draw_valeur_8() qui permettent d'afficher des valeurs 8 et 16 bits meme contenue dans une variable char ou int.
@@ -151,7 +162,6 @@ Grosse modification des noms de fonctions.
 - Ajout de la fonction load_file() 
 - Ajout de la fonction save_file()
 - Correction des adresses du timer A et B.
-
 
 ----------------------
 * Changement 0.0.4.0 *
