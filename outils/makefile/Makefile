@@ -1,7 +1,7 @@
 # ===========================
 # Makefile Happy C64
 # par Jean Monos
-# version 1.1 du 10/04/2021
+# version 1.2 du 01/10/2021
 # ===========================
 
 # ====================
@@ -36,17 +36,22 @@
 # ----------------
 # Nom du programme
 # ---------------- 
-NAME=exemple
+NAME=cassebr
 
 # ------------------
 # Nom de la diquette
 # ------------------
-name_d64=exemple.d64
+name_d64=cassebr.d64
 
 # -----------------
 # Nom de la casette
 # -----------------
-name_tape=exemple.tap
+name_tape=cassebr.tap
+
+# ------------------
+# Nom du fichier crt
+# -----------------
+name_crt=cartouche
 
 # -----------------
 # Dossier de sortie
@@ -58,6 +63,14 @@ OUT=bin
 # -------------------
 SOURCE= $(CURDIR)/source
 
+# -------------------
+# Dossier  mcart64
+# -------------------
+make_mcart64=../../outils/mcart64/mcart.exe
+# -------------------
+# Dossier Cartouche 
+# -------------------
+ADR_CARTOUCHE=../../cartridge
 # ------------------------------------
 # Dossier des datas seq et prg externe
 #--------------------------------------
@@ -79,6 +92,8 @@ ADROUT=$(CURDIR)/$(OUT)
 
 HAPPY=$(CURDIR)/../../hpc
 CRULE=-o $(ADROUT)/$(NAME).prg -u __EXEHDR__  -O -t c64 --include-dir $(HAPPY)/header 
+CRULE8K=-o $(ADROUT)/$(NAME).bin -O --config ../../cartridge/cart64_8k.cfg --include-dir $(HAPPY)/header 
+CRULE16K=-o $(ADROUT)/$(NAME).bin -O --config ../../cartridge/cart64_16k.cfg --include-dir $(HAPPY)/header 
 CFILES := $(sort $(wildcard $(SOURCE)/*.c))
 
 
@@ -99,13 +114,16 @@ all:  introduction clean_bin compilation
 floppy:  introduction clean_bin compilation d64
 tap:  introduction clean_bin compilation tape
 floptap:  introduction clean_bin compilation d64 tape
+crt8k:  introduction clean_bin compilation8k makecrt
+crt16k:  introduction clean_bin compilation16k makecrt
+
 # ========================
 # Introduction du makefile 
 # ========================
 introduction:
 	@echo ======================
 	@echo = MAKEFILE HAPPY C64 =
-	@echo = Version 1.0.0      =
+	@echo = Version 1.2.0      =
 	@echo ======================
 
 	
@@ -120,7 +138,29 @@ compilation:
 	@$(CC) $(CRULE) $(CFILES) $(HAPPY)/happyc64.lib
 	@echo compilation $(NAME).prg
 
-# =========================
+# ==================
+# Compilation crt 8k 
+# ==================
+compilation8k: 
+	@echo ===================================
+	@echo = Compilation Commodore 64 CRT 8k =
+	@echo ===================================
+	
+	@$(CC) $(CRULE8K) $(CFILES)  $(HAPPY)/happyc64.lib $(ADR_CARTOUCHE)/cart64_8k.o
+	@echo compilation $(NAME).bin
+
+# ==================
+# Compilation crt 16k 
+# ==================
+compilation16k: 
+	@echo ===================================
+	@echo = Compilation Commodore 64 CRT 16k =
+	@echo ===================================
+	
+	@$(CC) $(CRULE16K) $(CFILES)  $(HAPPY)/happyc64.lib $(ADR_CARTOUCHE)/cart64_8k.o
+	@echo compilation $(NAME).bin
+
+# ======================== 
 # Effacement du dossier bin 
 # =========================
 clean_bin:
@@ -130,7 +170,10 @@ clean_bin:
 	@rm -f $(ADROUT)/*.prg
 	@rm -f $(ADROUT)/*.d64
 	@rm -f $(ADROUT)/*.rp9
-	@echo erase files prg, d64 et rp9 	
+	@rm -f $(ADROUT)/*.tap
+	@rm -f $(ADROUT)/*.bin
+	@rm -f $(ADROUT)/*.CRT
+	@echo erase files prg, d64 et rp9 tap bin crt 	
 
 # =========================================================
 # Creation de la disquette avec les datas si elles existent
@@ -159,8 +202,23 @@ d64:
 		$(create_d64) -f $$fileprg -T PRG   -w $(CURDIR)/$(dossier_data)/$$fileprg.prg   -n $(NAME) $(ADROUT)/$(name_d64) ;\
 	done	
   
+
+# ======================== #
+# Creation du fichier TAPE #
+# ======================== #
+
 tape:
 	@echo ----------------
 	@echo = Fichier TAPE =
 	@echo ----------------
 	@$(create_tape) -t $(ADROUT)/$(name_tape) $(ADROUT)/$(NAME).prg
+
+
+# ======================== #
+# Creation du fichier CRT #
+# ======================== #
+makecrt:
+	@echo ----------------
+	@echo = Fichier CRT  =
+	@echo ----------------
+	@$(make_mcart64) $(ADROUT)/$(NAME).bin $(name_crt)
