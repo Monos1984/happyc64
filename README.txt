@@ -27,7 +27,8 @@ mise à jour le 1/10/2021
 =======================
 - Ajout du dossier cartridge qui contient deux fichier cfg, deux fichier objet 
 - Ajout du logiciel mcart.exe recompilé pour fonctionner sur un os windows64bits.
- 
+- Ajout de.bat dans le dossier makefile
+- update du makefile pour compiler vos projets en cartouche standard 8 ou 16ko
 
 ======================
 * Changement 0.2.3.5 *
