@@ -15,12 +15,19 @@ Ecrit par Loïc Lété (Jean Monos)
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 22/04/2021
+mise à jour le 1/10/2021
 
 
 ===============================================
 ============= Version 0.2.x.x =================
 ===============================================
+
+=======================
+* Changement Hors Lib *
+=======================
+- Ajout du dossier cartridge qui contient deux fichier cfg, deux fichier objet 
+- Ajout du logiciel mcart.exe recompilé pour fonctionner sur un os windows64bits.
+ 
 
 ======================
 * Changement 0.2.3.5 *
