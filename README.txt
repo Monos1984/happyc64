@@ -34,7 +34,8 @@ mise à jour le 1/10/2021
 ======================
 - Correction dans le header de la fonction set_sprite_multicolore_on()
 - Ajout de fonction pour gérer le paddle. (Bêta et non documenté)
-
+- Modification du makefile pour compiler vos projets en cartouche standard 8 et 16ko.
+- Ajout de .bat de compilation
 ======================
 * Changement 0.2.3.0 *
 ======================
