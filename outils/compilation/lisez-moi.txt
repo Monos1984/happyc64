@@ -1,0 +1,28 @@
+****************************
+*** Compilation_xxxx.bat ***
+****************************
+Voici des fichiers de compilation sans passer par un makefile.
+A placer à la racine du dossier de votre projet.
+
+-----------------------
++ Compilation_prg.bat +
+-----------------------
+Fichier bat qui permet de compiler votre projet en format .prg.
+
+-----------------------
++ Compilation_tap.bat +
+-----------------------
+Fichier bat qui permet de compiler votre projet en format .tap.
+(Casset audio)
+
+----------------------
++ Compilation_crt_8k +
+----------------------
+Fichier bat qui permet de compiler votre programme en cartouche strandard 8ko.
+Un fichier bin et un fichier crt sont générés.
+
+----------------------
++ Compilation_crt_16k +
+----------------------
+Fichier bat qui permet de compiler votre programme en cartouche strandard 16ko.
+Un fichier bin et un fichier crt sont générés.
