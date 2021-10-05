@@ -4,6 +4,25 @@
 Voici des fichiers de compilation sans passer par un makefile.
 A placer à la racine du dossier de votre projet.
 
+---------------------
+*** Configuration ***
+---------------------
+Chaque fichier Compilation se configure.
+
+set prg_prog : nom du progragrame. ajouté un .prg sauf en mode cartouche entrée seulement le nom.
+set name_d7: Nom de la disquette. ajouté l'extenssion d7 (Seulement en compilation disquette)
+set tap_prog: Nom de la cassette. ajouté l'extenssion .tap  (Seulement en compilation cassette)
+
+
+set adr_source : Dossier ou se trouve le code de votre jeu.
+set adr_out : Le dossier ou va sortir la compilation.
+fichier: les fichier à compilé:
+	%adr_source%main.c    
+		permet de compiler et linker le fichier main.c
+	%adr_source%main.c %adr_source%worfkow.c
+		permet de compiler et linker le fichier main.c et worflow.c 
+
+
 -----------------------
 + Compilation_prg.bat +
 -----------------------
@@ -14,6 +33,15 @@ Fichier bat qui permet de compiler votre projet en format .prg.
 -----------------------
 Fichier bat qui permet de compiler votre projet en format .tap.
 (Casset audio)
+
+
+-----------------------
++ Compilation_d64.bat +
+-----------------------
+Fichier bat qui permet de compiler votre projet en format .d64.
+(Disquette)
+Permet aussi d'intégrer des fichiers extern USR,PRG,SEQ dans la disquette du dossier "data"
+
 
 ----------------------
 + Compilation_crt_8k +
