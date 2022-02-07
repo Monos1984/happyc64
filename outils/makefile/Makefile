@@ -36,17 +36,17 @@
 # ----------------
 # Nom du programme
 # ---------------- 
-NAME=cassebr
+NAME=prog
 
 # ------------------
 # Nom de la diquette
 # ------------------
-name_d64=cassebr.d64
+name_d64=prog.d64
 
 # -----------------
 # Nom de la casette
 # -----------------
-name_tape=cassebr.tap
+name_tape=prog.tap
 
 # ------------------
 # Nom du fichier crt
