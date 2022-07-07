@@ -1,8 +1,8 @@
 ﻿=====================
 * Makefile HappyC64 *
 =====================
-version 12 du 1.10/21
-
+version 1.2 du 1.10/21
+(Mise à jour du lisez moi le 07/07/2022)
 ---------------
 * Préparation *
 ---------------
@@ -10,10 +10,10 @@ Le dossier makefile dans outils comprend le lisez moi que vous êtes en train de
 
 Copier et coller à la racine de votre projet les deux fichiers make.bat et Makefile. Le make.exe reste ici.
 
-Pour lancer la compilation manuel, vous devez cliquer sur make.bat de votre projet. note : Il existe 4 configuration.
+Pour lancer la compilation manuel, vous devez cliquer sur make.bat de votre projet. note : Il existe 4 configurations.
 
 - make  
-lance la compilation avec seulement le prg
+lance la compilation avec seulement le .prg (programme pur)
 
 - make floppy
 permet de créer une disquette
@@ -30,6 +30,7 @@ permet de créer une cartouche standard 8ko
 
 - make crt16k
 permet de créer une cartouche standard 16ko
+
 -----------------
 * Configuration *
 -----------------
@@ -37,10 +38,10 @@ Le makefile possède un espace de configuration.
 
 NAME : Le nom de votre programme en sortie. l'extenssion .prg sera ajouté automatiquement.
 
-OUT : le dossier ou ba se créer le prg généré et le .d64
+OUT : le dossier ou va se créer le prg généré et le .d64
 
 dossier_data : le dossier ou se placerons vos fichier extern prg et sql si vous en utiliser.
 
 SOURCE : le dossier ou se trouve votre code source. (Garder le $(CURDIR))
 
-Il existe d'autre variable de configuration comme le lien de cl65, de cc1541, de la lib happyc64... utile à re configurer si vous chamboulé l'organisation par défaut des dossier.
+Il existe d'autre variable de configuration comme le lien de cl65, de cc1541, de la lib happyc64... utile à re configurer si vous chamboulez l'organisation par défaut des dossiers.
