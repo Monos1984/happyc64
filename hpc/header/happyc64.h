@@ -68,6 +68,7 @@
   /* Gestion du pointeur de la tilemap */
   
   #define SM_0                       0  // Adresse $0
+  #define SM_0000                    0  // Adresse $0
   #define SM_0400                   16  // Adresse $0400 (par defaut)
   #define SM_0800                   32  // Adresse $0800
   #define SM_0C00                   48  // Adresse $0C00
@@ -314,7 +315,7 @@
   // * get_system() *
   // ----------------
   /*
-    - Retourne le type de processeur. pal(1) ou ntsc(1)
+    - Retourne le type de processeur. NTSC(0),PAL(1)
   */
   
   unsigned char get_system();
@@ -498,9 +499,20 @@
   */
   void set_color_background_3 (unsigned char color_id); 
 
+
+
+ // * draw_meta_tiles(unsigned char position_x, unsigned char position_y, unsigned char id_character, 
+ // unsigned char color_id) *
+ /*
+ - Permet d'afficher un meta tile (4 tiles)
+ */
+
+
+  void draw_meta_tiles(unsigned char position_x, unsigned char position_y, unsigned char id_character, unsigned char color_id);
+
   // --------------------------------------------------------------------------
-  // *draw_full_character(position_x, position_y,id_character, color_id)          *
-  // --------------------------------------------------------------------------
+  // * draw_full_character(position_x, position_y,id_character, color_id)     *
+  // --------------------------------------------------------------------e-----
   /*
     - Permet d'afficher un character à l'écran et la couleur de la case 
      # position_x : position horizontale du character sur le quadrillage 8x8. (0-255)
@@ -555,6 +567,7 @@
   void cls_color_ram(unsigned char color);
   void cls_bitmap_color_ram(unsigned char ink_color,unsigned char background_color); 
   void cls_bitmap();
+  
   // ================================
   // ** Configuration video       **
   // ================================
@@ -652,8 +665,8 @@
  void sprite_priority_on(unsigned char id_sprite);
  void sprite_priority_off(unsigned char id_sprite);
  
- void sprite_multicolore_on(unsigned char id_sprite);
- void sprite_multicolore_off(unsigned char id_sprite);
+ void set_sprite_multicolore_on(unsigned char id_sprite);
+ void set_sprite_multicolore_off(unsigned char id_sprite);
  
  void set_color_sprite(unsigned char id_sprite,unsigned char color_id);
  void set_sprite_color_1(unsigned char color_id);
@@ -741,7 +754,7 @@
   // * set_interruption_on()               *
   // * set_interruption_off()              *
   // ---------------------------------------
-  /* Desavtive (off)/Reactive (on) les interruptions*/
+  /* Desactive (off)/Reactive (on) les interruptions*/
  
    #define set_interruption_on()  POKE(0xDC0D,129) 
    #define set_interruption_off() POKE(0xDC0D,127) 
@@ -805,6 +818,7 @@
   // * Générateur aléatoire de nombre sur 1 octet *
   // ==============================================
    unsigned char get_rnd(unsigned char max_number);
+  
   // ==============================================
   // * Générateur aléatoire de nombre sur 2 octet *
   // ==============================================
@@ -882,8 +896,7 @@
   // ========================  
   // * Gestion de Save Data *
   // ========================
-  
-  
+   
   // --------------------------------------------------------------------------------------------
   // * save_file(unsigned char*name,const void* buffer, unsigned int size,unsigned char device) *
   // --------------------------------------------------------------------------------------------
@@ -948,6 +961,7 @@
   void draw_character_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color);
   
   unsigned int pow(unsigned int value, unsigned int power);
+ 
  // ----------------------
  // * rle_decrompression *
  // ----------------------
@@ -981,12 +995,17 @@
   // * Bitmap Fonction *
   // ===================
   void draw_pixel(unsigned int px, unsigned int py);
-  
-  
+    
   // ==========
   // * Paddle *
   // ==========
   unsigned char get_paddle(unsigned char port,unsigned char id_paddle);
   unsigned char get_paddle_fire(unsigned char port,unsigned char id_paddle);
+  
+  // ======================
+  // * 4 player interface *
+  // ======================
+  void init_4pi();
+  unsigned char get_joystick_3();
   
 #endif
