@@ -14,6 +14,7 @@
 #include <happyc64.h>
 #include <string.h>
 
+
 // ===================  
 // * Variable extern *
 // ===================
@@ -27,9 +28,23 @@ extern unsigned char buffer_vic_bank;
 void draw_pixel(unsigned int px, unsigned int py)
 {
     unsigned int adr,py2;
-    py2 = (py>>3);
-    adr=(buffer_vic_bank<<14)+G_pointeur_pattern+((py2)<<8)+((py2)<<6) +((px>>3)<<3)+(py&7);  
-    POKE(adr,PEEK(adr)|pow(2,7-(px&7)  ));
+    unsigned int brow,bchar,bline,bbit,bbyte,bbase;
+   
+   // py2 = (py>>3);
+   // adr=(buffer_vic_bank<<14)+G_pointeur_pattern+((py2)<<8)+((py2)<<6) +((px>>3)<<3)+(py&7);  
+   //adr=8192+((py/8)*320)+(px/8)*8+(py&7); 
+    bbase = (buffer_vic_bank<<14)+G_pointeur_pattern;
+    
+    brow = py/8;
+    bchar = px/8;
+    bline = py&7;
+    bbit = 7-(px & 7);
+    bbyte = bbase + brow*320+bchar*8+bline;
+    POKE (bbyte,PEEK(bbyte) | pow(2,bbit));
+    
+    
+    
+  //  POKE(adr,PEEK(adr)|pow(2,7-(px&7)  ));
 }
 
 // ========================
@@ -45,6 +60,8 @@ void set_bitmap_color_map(unsigned char px, unsigned char py, unsigned char colo
 // =============
 unsigned int pow(unsigned int value, unsigned int power)
 {
+  
+  /*
   unsigned int resultat,i;
   resultat = 1;
   
@@ -60,6 +77,22 @@ unsigned int pow(unsigned int value, unsigned int power)
  {
   resultat = 1;
  }
+ 
+ */
+ 
+  // Déclaration des variables
+    int compteur, resultat;
+ 
+    compteur = 0;
+    resultat = 1;
+ 
+    while (compteur <= power){
+        resultat = resultat * value;
+        compteur ++;
+    }
+ 
+ 
+ 
   return resultat;
 }
 

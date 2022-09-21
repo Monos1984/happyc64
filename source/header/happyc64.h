@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.2.2.0                        *
-* Modification ... : 8/04/2021                       *
+* Version ........ : V 0.2.4.0                        *
+* Modification ... : 20/09/2022                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -68,6 +68,7 @@
   /* Gestion du pointeur de la tilemap */
   
   #define SM_0                       0  // Adresse $0
+  #define SM_0000                    0  // Adresse $0
   #define SM_0400                   16  // Adresse $0400 (par defaut)
   #define SM_0800                   32  // Adresse $0800
   #define SM_0C00                   48  // Adresse $0C00
@@ -498,13 +499,24 @@
   */
   void set_color_background_3 (unsigned char color_id); 
 
+
+
+ // * draw_meta_tiles(unsigned char position_x, unsigned char position_y, unsigned char id_character, 
+ // unsigned char color_id) *
+ /*
+ - Permet d'afficher un meta tile (4 tiles)
+ */
+
+
+  void draw_meta_tiles(unsigned char position_x, unsigned char position_y, unsigned char id_character, unsigned char color_id);
+
   // --------------------------------------------------------------------------
-  // *draw_full_character(position_x, position_y,id_character, color_id)          *
-  // --------------------------------------------------------------------------
+  // * draw_full_character(position_x, position_y,id_character, color_id)     *
+  // --------------------------------------------------------------------e-----
   /*
     - Permet d'afficher un character à l'écran et la couleur de la case 
      # position_x : position horizontale du character sur le quadrillage 8x8. (0-255)
-     # position_x : position verticale du character sur le quadrillage 8x8.(0-255)
+     # position_y : position verticale du character sur le quadrillage 8x8.(0-255)
      # id_character : index du character à poser. (0-255)
      # color_id   : couleur du character.    
   */
@@ -652,8 +664,8 @@
  void sprite_priority_on(unsigned char id_sprite);
  void sprite_priority_off(unsigned char id_sprite);
  
- void sprite_multicolore_on(unsigned char id_sprite);
- void sprite_multicolore_off(unsigned char id_sprite);
+ void set_sprite_multicolore_on(unsigned char id_sprite);
+ void set_sprite_multicolore_off(unsigned char id_sprite);
  
  void set_color_sprite(unsigned char id_sprite,unsigned char color_id);
  void set_sprite_color_1(unsigned char color_id);
@@ -741,7 +753,7 @@
   // * set_interruption_on()               *
   // * set_interruption_off()              *
   // ---------------------------------------
-  /* Desavtive (off)/Reactive (on) les interruptions*/
+  /* Desactive (off)/Reactive (on) les interruptions*/
  
    #define set_interruption_on()  POKE(0xDC0D,129) 
    #define set_interruption_off() POKE(0xDC0D,127) 
@@ -988,5 +1000,57 @@
   // ==========
   unsigned char get_paddle(unsigned char port,unsigned char id_paddle);
   unsigned char get_paddle_fire(unsigned char port,unsigned char id_paddle);
+  
+  // ======================
+  // * 4 player interface *
+  // ======================
+  void init_4pi();
+  unsigned char get_joystick_3();
+  
+  // ****************************
+  // * Happy C64 Map            *
+  // ****************************
+  
+  // --------------------------------
+  // * Modifier la taille de la map *
+  // --------------------------------
+  void hm_set_map_size_x(unsigned char value);
+  void hm_set_map_size_y(unsigned char value);
+  
+  // -----------------------------------------------
+  // * Modifier les coordonnee de depart de la map *
+  // -----------------------------------------------
+  void hm_set_map_offset_x(unsigned char value);
+  void hm_set_map_offset_y(unsigned char value);
+  
+  // -----------------------------------------------
+  // * Modifier le numero du meta tile dans la map *
+  // -----------------------------------------------
+  void hm_set_buffer_map(unsigned char px,unsigned char py,unsigned char value);
+  
+  // ------------------------------------
+  // * Modifier les datas des meta tile *
+  // ------------------------------------
+  /*
+  id_mt = index du meta tile (0-61)
+  
+  id_1 = index du tile haut gauche. (0-256)
+  id_2 = index du tile haut droite. (0-256)
+  id_3 = index du tile bas gauche. (0-256)
+  id_4 = index du tile bas droite. (0-256)
+  
+  color_1 = index de couleur du tile haut gauche (0-15)
+  color_2 = index de couleur du tile haut droite (0-15)
+  color_3 = index de couleur du tile bas gauche (0-15)
+  color_4 = index de couleur du tile bas droite (0-15)
+  */
+  
+  void hm_set_tile_data(unsigned char id_mt,unsigned char id_1,unsigned char id_2,unsigned char id_3,unsigned char id_4,unsigned char color_1,unsigned char color_2,unsigned char color_3,unsigned char color_4);
+  
+  // -----------------------------
+  // * Afficher la map à l'ecran *
+  // -----------------------------
+  void hm_draw_map();
+  
   
 #endif

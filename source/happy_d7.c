@@ -31,9 +31,9 @@ unsigned char save_file(unsigned char*name,const void* buffer, unsigned int size
  return error;
 }
 
-// ================================================
-// * Charger les data d'un fichier dans un buffer *
-// ================================================
+// =================================================
+// * Charger les datas d'un fichier dans un buffer *
+// =================================================
 unsigned int load_file(const char*name, const void* buffer, unsigned char device)
 {
   unsigned int error;
