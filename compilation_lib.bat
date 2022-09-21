@@ -36,7 +36,9 @@ cc65\bin\cc65 -O -t c64 --include-dir %adr_source%/header %adr_source%/happy_scr
 cc65\bin\cc65 -O -t c64 --include-dir %adr_source%/header %adr_source%/happy_bit.c
 cc65\bin\cc65 -O -t c64 --include-dir %adr_source%/header %adr_source%/happy_raster.c
 cc65\bin\cc65 -O -t c64 --include-dir %adr_source%/header %adr_source%/happy_timer.c
-
+cc65\bin\cc65 -O -t c64 --include-dir %adr_source%/header %adr_source%/happy_paddle.c
+cc65\bin\cc65 -O -t c64 --include-dir %adr_source%/header %adr_source%/happy_4player.c
+cc65\bin\cc65 -O -t c64 --include-dir %adr_source%/header %adr_source%/happy_map.c
 echo --------------
 echo - Assemblage -
 echo --------------
@@ -58,6 +60,9 @@ cc65\bin\ca65 %adr_source%/happy_scrolling.s
 cc65\bin\ca65 %adr_source%/happy_bit.s
 cc65\bin\ca65 %adr_source%/happy_raster.s
 cc65\bin\ca65 %adr_source%/happy_timer.s
+cc65\bin\ca65 %adr_source%/happy_paddle.s
+cc65\bin\ca65 %adr_source%/happy_4player.s
+cc65\bin\ca65 %adr_source%/happy_map.s
 
 echo -------------------
 echo - Editeur de lien -
@@ -65,11 +70,11 @@ echo -------------------
 for %%i in (%adr_source%\*.o) do ( 
 echo %%~nxi
  )
-cc65\bin\ar65 r %adr_lib%/happyc64.lib %adr_source%/happyc64.o %adr_source%/happy_sid.o %adr_source%/happy_sprite.o %adr_source%/happy_texte.o %adr_source%/happy_d7.o %adr_source%/happy_reu.o %adr_source%/happy_bitmap.o %adr_source%/happy_io.o %adr_source%/happy_rle.o %adr_source%/happy_vic.o %adr_source%/happy_random.o %adr_source%/happy_scrolling.o %adr_source%/happy_bit.o %adr_source%/happy_raster.o %adr_source%/happy_timer.o 
+cc65\bin\ar65 r %adr_lib%/happyc64.lib %adr_source%/happyc64.o %adr_source%/happy_sid.o %adr_source%/happy_sprite.o %adr_source%/happy_texte.o %adr_source%/happy_d7.o %adr_source%/happy_reu.o %adr_source%/happy_bitmap.o %adr_source%/happy_io.o %adr_source%/happy_rle.o %adr_source%/happy_vic.o %adr_source%/happy_random.o %adr_source%/happy_scrolling.o %adr_source%/happy_bit.o %adr_source%/happy_raster.o %adr_source%/happy_timer.o %adr_source%/happy_paddle.o %adr_source%/happy_4player.o %adr_source%/happy_map.o
 
 
 pause
-
+ 
 echo -------------------
 echo - Deplacement lib -
 echo -------------------
