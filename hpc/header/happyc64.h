@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.2.2.0                        *
-* Modification ... : 8/04/2021                       *
+* Version ........ : V 0.2.4.0                        *
+* Modification ... : 20/09/2022                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -315,7 +315,7 @@
   // * get_system() *
   // ----------------
   /*
-    - Retourne le type de processeur. NTSC(0),PAL(1)
+    - Retourne le type de processeur. pal(1) ou ntsc(1)
   */
   
   unsigned char get_system();
@@ -516,7 +516,7 @@
   /*
     - Permet d'afficher un character à l'écran et la couleur de la case 
      # position_x : position horizontale du character sur le quadrillage 8x8. (0-255)
-     # position_x : position verticale du character sur le quadrillage 8x8.(0-255)
+     # position_y : position verticale du character sur le quadrillage 8x8.(0-255)
      # id_character : index du character à poser. (0-255)
      # color_id   : couleur du character.    
   */
@@ -567,7 +567,6 @@
   void cls_color_ram(unsigned char color);
   void cls_bitmap_color_ram(unsigned char ink_color,unsigned char background_color); 
   void cls_bitmap();
-  
   // ================================
   // ** Configuration video       **
   // ================================
@@ -818,7 +817,6 @@
   // * Générateur aléatoire de nombre sur 1 octet *
   // ==============================================
    unsigned char get_rnd(unsigned char max_number);
-  
   // ==============================================
   // * Générateur aléatoire de nombre sur 2 octet *
   // ==============================================
@@ -896,7 +894,8 @@
   // ========================  
   // * Gestion de Save Data *
   // ========================
-   
+  
+  
   // --------------------------------------------------------------------------------------------
   // * save_file(unsigned char*name,const void* buffer, unsigned int size,unsigned char device) *
   // --------------------------------------------------------------------------------------------
@@ -961,7 +960,6 @@
   void draw_character_line_H(unsigned char px,unsigned char py,unsigned char size, unsigned char id_character,unsigned char color);
   
   unsigned int pow(unsigned int value, unsigned int power);
- 
  // ----------------------
  // * rle_decrompression *
  // ----------------------
@@ -995,7 +993,8 @@
   // * Bitmap Fonction *
   // ===================
   void draw_pixel(unsigned int px, unsigned int py);
-    
+  
+  
   // ==========
   // * Paddle *
   // ==========
@@ -1007,5 +1006,51 @@
   // ======================
   void init_4pi();
   unsigned char get_joystick_3();
+  
+  // ****************************
+  // * Happy C64 Map            *
+  // ****************************
+  
+  // --------------------------------
+  // * Modifier la taille de la map *
+  // --------------------------------
+  void hm_set_map_size_x(unsigned char value);
+  void hm_set_map_size_y(unsigned char value);
+  
+  // -----------------------------------------------
+  // * Modifier les coordonnee de depart de la map *
+  // -----------------------------------------------
+  void hm_set_map_offset_x(unsigned char value);
+  void hm_set_map_offset_y(unsigned char value);
+  
+  // -----------------------------------------------
+  // * Modifier le numero du meta tile dans la map *
+  // -----------------------------------------------
+  void hm_set_buffer_map(unsigned char px,unsigned char py,unsigned char value);
+  
+  // ------------------------------------
+  // * Modifier les datas des meta tile *
+  // ------------------------------------
+  /*
+  id_mt = index du meta tile (0-61)
+  
+  id_1 = index du tile haut gauche. (0-256)
+  id_2 = index du tile haut droite. (0-256)
+  id_3 = index du tile bas gauche. (0-256)
+  id_4 = index du tile bas droite. (0-256)
+  
+  color_1 = index de couleur du tile haut gauche (0-15)
+  color_2 = index de couleur du tile haut droite (0-15)
+  color_3 = index de couleur du tile bas gauche (0-15)
+  color_4 = index de couleur du tile bas droite (0-15)
+  */
+  
+  void hm_set_tile_data(unsigned char id_mt,unsigned char id_1,unsigned char id_2,unsigned char id_3,unsigned char id_4,unsigned char color_1,unsigned char color_2,unsigned char color_3,unsigned char color_4);
+  
+  // -----------------------------
+  // * Afficher la map à l'ecran *
+  // -----------------------------
+  void hm_draw_map();
+  
   
 #endif
