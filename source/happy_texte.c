@@ -35,7 +35,20 @@ void set_text_pointer(unsigned char pointer)
 // ==============================
 void draw_text_value_8 (unsigned char px,unsigned char py,unsigned char value,unsigned char color)
 {
-  sprintf(buffer_8,"%d",value);
+  unsigned char centaine,dizaine,unite,intermed;
+    
+  centaine = value / 100;
+  intermed = value - 100*centaine;
+  dizaine = intermed/10;
+  unite = intermed-dizaine*10;
+  
+  buffer_8[0]=centaine+48;
+  buffer_8[1]=dizaine+48;
+  buffer_8[2]=unite+48;
+  buffer_8[3]=0;
+  
+  
+  // sprintf(buffer_8,"%d",value);
   draw_text( px,py,buffer_8,color,0);
 }
 
@@ -44,6 +57,45 @@ void draw_text_value_8 (unsigned char px,unsigned char py,unsigned char value,un
 // ===============================
 void draw_text_value_16 (unsigned char px,unsigned char py,  unsigned int value,unsigned char color)
 {
+
+  unsigned int buffer;
+  
+  buffer_16[0] = value/10000;
+  buffer = value-( buffer_16[0]*10000);
+  
+  buffer_16[1] = value/1000;
+  buffer = value-( buffer_16[1]*1000);
+  
+   buffer_16[2] = value/100;
+  buffer = value-( buffer_16[2]*100);
+  
+   buffer_16[3] = value/10;
+
+  
+ 
+   buffer_16[4] = value-( buffer_16[3]*10);
+   buffer_16[5] = 0;
+  /*
+   0->65535
+   
+   B1=value/10000 (6)
+   buffer = value-(B1*10000) = 5535
+   
+   B2 = buffer / 1000  = 5.535
+   buffer = buffer-(B2*1000)  535
+   
+   B3 = buffer / 100  5.35
+   buffer = buffer-(B3*100)  35
+   
+      
+   B4 = buffer / 10  3.5
+   B5 = buffer-(B4*10) 5
+   
+      
+
+   
+  */
+  
   sprintf(buffer_16,"%u",value);
   draw_text( px,py,buffer_16,color,0);
 }
