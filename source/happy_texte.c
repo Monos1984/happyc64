@@ -96,7 +96,7 @@ void draw_text_value_16 (unsigned char px,unsigned char py,  unsigned int value,
    
   */
   
-  sprintf(buffer_16,"%u",value);
+ // sprintf(buffer_16,"%u",value);
   draw_text( px,py,buffer_16,color,0);
 }
 
