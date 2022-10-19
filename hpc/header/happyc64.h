@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.2.4.0                        *
-* Modification ... : 20/09/2022                       *
+* Version ........ : V 0.2.4.1                        *
+* Modification ... : 19/10/2022                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -260,6 +260,20 @@
   
   
   unsigned char test();
+  
+  
+  // =====================
+  // * Initiation facile *
+  // =====================
+  void init_vic_hpc();
+  
+  //  --------------------------
+  //  * Configuration suivante *
+  //  -------------------------- 
+  //  VIC II ............... $C000
+  //  Screen Memory......... $E000
+  //  Pointeur de patern.... $E800 
+    
   
   // ============================
   // * Gestion des interuptions *
