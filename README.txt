@@ -15,7 +15,7 @@ Ecrit par Loïc Lété (Jean Monos)
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 14/02/2023
+mise à jour le 10/09/2023
 
 ===============================================
 ============= Version 0.2.x.x =================
@@ -24,7 +24,7 @@ mise à jour le 14/02/2023
 ===================================
 * Changement 0.2.5.0 (10/09/2023) *
 ===================================
-* Non publier *
+
 
 - Correction de la fonction RLE
 - Ajout de la fonction hm_get_id_tiles(..) pour récuperer l'id tiles du buffer map.
