@@ -49,7 +49,7 @@ void draw_text_value_8 (unsigned char px,unsigned char py,unsigned char value,un
   
   
   // sprintf(buffer_8,"%d",value);
-  draw_text( px,py,buffer_8,color,0);
+  draw_text( px,py,(char*)buffer_8,color,0);
 }
 
 // ===============================
@@ -97,13 +97,13 @@ void draw_text_value_16 (unsigned char px,unsigned char py,  unsigned int value,
   */
   
  // sprintf(buffer_16,"%u",value);
-  draw_text( px,py,buffer_16,color,0);
+  draw_text( px,py,(char*)buffer_16,color,0);
 }
 
 // ============================
 // * Afficher un bloc de text *
 // ============================
-void draw_bloc_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color,unsigned char size_ligne, unsigned char slow_wait_letter)
+void draw_bloc_text(unsigned char px,unsigned char py,char* text,unsigned char color,unsigned char size_ligne, unsigned char slow_wait_letter)
 {
   
   unsigned int i=0;
@@ -119,8 +119,8 @@ void draw_bloc_text(unsigned char px,unsigned char py,unsigned char* text,unsign
   while ('\0' != text[i])
   {
     
-      // &  text[i+1]=='S'
-    if(text[i]=='@' )
+     
+    if(text[i]=='@')
      
     switch(text[i+1])
     {
@@ -207,7 +207,7 @@ void draw_bloc_text(unsigned char px,unsigned char py,unsigned char* text,unsign
 // =======================
 // ** Afficher un texte **
 // =======================
-void draw_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color,unsigned char slow_wait_letter)
+void draw_text(unsigned char px,unsigned char py,char* text,unsigned char color,unsigned char slow_wait_letter)
 {
   unsigned char i=0;
   unsigned char  id_tiles;

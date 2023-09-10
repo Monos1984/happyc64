@@ -16,6 +16,9 @@
 // ==================================
 // * Attendre l'appuis d'une touche *
 // ==================================
+/*
+ La boucle key_empty utile pour le mode bloc text et wait key !!!
+*/
 void wait_key(unsigned char id_key)
 {
   if (id_key==KEY_EMPTY)
@@ -32,4 +35,19 @@ void wait_key(unsigned char id_key)
       wait_vbl();
     }
   }
+}
+
+
+void wait_key_release(unsigned char id_key)
+{
+  while(get_keyboard_key()!=id_key)
+  {
+    wait_vbl();
+  }
+  
+  while(get_keyboard_key()!=KEY_EMPTY)
+  {
+    wait_vbl();
+  }
+  
 }

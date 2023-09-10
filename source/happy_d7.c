@@ -20,7 +20,7 @@
 // =========================================
 // * Sauvegarder dans un fichier un buffer *
 // =========================================
-unsigned char save_file(unsigned char*name,const void* buffer, unsigned int size,unsigned char device)
+unsigned char save_file(const char*name,const void* buffer, unsigned int size,unsigned char device)
 { 
   unsigned char error;
   
@@ -37,7 +37,7 @@ unsigned char save_file(unsigned char*name,const void* buffer, unsigned int size
 unsigned int load_file(const char*name, const void* buffer, unsigned char device)
 {
   unsigned int error;
-  error = cbm_load (name, device, buffer);
+  error = cbm_load (name, device, (void*)buffer);
   return error;  
 }
 

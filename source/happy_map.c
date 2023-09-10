@@ -135,3 +135,44 @@
     
   }
   
+
+	
+// ====================================================
+// * Lecture de l'index du metal tiles dans le buffer *
+// ============================ ========================
+unsigned char hm_get_id_tiles(unsigned char px,unsigned char py)
+{
+	unsigned char index_tiles;
+	index_tiles = buffer_map[py*hm_size_x+px];
+	return index_tiles;
+}
+
+
+// ===================================
+// * Afficher un meta_tile de la map *
+// ===================================
+void hm_draw_meta_tiles(unsigned char px,unsigned char py)
+{
+	 // -----------------------------
+   // * Declaration des variables *
+   // -----------------------------
+   unsigned char id_tiles,pxt,pyt;
+   unsigned int offset_octet_tiles,offset_id_tiles;
+	 
+	 // ----------------------------
+   // * Calcule des informations *
+   // ----------------------------
+   offset_octet_tiles = py*hm_size_x + px;
+   id_tiles = buffer_map[offset_octet_tiles];
+   offset_id_tiles = id_tiles*8;
+   pxt = px*2+hm_offset_x;
+   pyt = py*2+hm_offset_y;
+	 
+	 // ----------------------
+   // * Affichage du tiles *
+   // ----------------------
+   draw_full_character(pxt,pyt,tiles_buffer[offset_id_tiles],tiles_buffer[offset_id_tiles+4]);
+   draw_full_character(pxt+1,pyt,tiles_buffer[offset_id_tiles+1],tiles_buffer[offset_id_tiles+5]);
+   draw_full_character(pxt,pyt+1,tiles_buffer[offset_id_tiles+2],tiles_buffer[offset_id_tiles+6]);
+   draw_full_character(pxt+1,pyt+1,tiles_buffer[offset_id_tiles+3],tiles_buffer[offset_id_tiles+7]);
+}

@@ -27,7 +27,7 @@ extern unsigned char buffer_vic_bank;
 // ==============
 void draw_pixel(unsigned int px, unsigned int py)
 {
-    unsigned int adr,py2;
+    //unsigned int adr,py2;
     unsigned int brow,bchar,bline,bbit,bbyte,bbase;
    
    // py2 = (py>>3);

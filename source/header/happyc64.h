@@ -3,8 +3,8 @@
 *******************************************************
 * Role ........... : Entête du sdk                    *
 * Auteur ......... : Jean Monos                       *
-* Version ........ : V 0.2.4.0                        *
-* Modification ... : 20/09/2022                       *
+* Version ........ : V 0.2.5.0                        *
+* Modification ... : 10/09/2023                       *
 * Licence ........ : Creative Commons by-sa           *
 * Compilateur .... : cc65                             *
 *******************************************************/
@@ -261,6 +261,20 @@
   
   unsigned char test();
   
+  
+  // =====================
+  // * Initiation facile *
+  // =====================
+  void init_vic_hpc();
+  
+  //  --------------------------
+  //  * Configuration suivante *
+  //  -------------------------- 
+  //  VIC II ............... $C000
+  //  Screen Memory......... $E000
+  //  Pointeur de patern.... $E800 
+    
+  
   // ============================
   // * Gestion des interuptions *
   // ============================
@@ -285,9 +299,9 @@
  /*
   Permet d'afficher un text à l'écran.
  */
-  void draw_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color,unsigned char slow_wait_letter);
+  void draw_text(unsigned char px,unsigned char py, char* text,unsigned char color,unsigned char slow_wait_letter);
   
-  void draw_bloc_text(unsigned char px,unsigned char py,unsigned char* text,unsigned char color,unsigned char size_ligne, unsigned char slow_wait_letter);
+  void draw_bloc_text(unsigned char px,unsigned char py,char* text,unsigned char color,unsigned char size_ligne, unsigned char slow_wait_letter);
  // --------------------------------------------------------------------------------------------------- 
  // * void draw_valeur_8 (unsigned char px,unsigned char py,unsigned char valeur,unsigned char color) *
  // ---------------------------------------------------------------------------------------------------
@@ -712,6 +726,7 @@
   // ** Attendre qu'une touche soit presser **
   // =========================================
   void wait_key(unsigned char id_key);
+  void wait_key_release(unsigned char id_key);
  
   // ================================
   // ** Gestion de la mémoire      **
@@ -911,7 +926,7 @@
        #size   : Taille du fichier à enregistrer. (Sur disquette 2 octets va s'ajouter au début du fichier)
        #device : Id du device. 1 pour casette, 8 pour lecteur disquette 1, 9 pour lecteur disquette 2 ... 
   */
-  unsigned char save_file(unsigned char*name,const void* buffer, unsigned int size,unsigned char device);
+  unsigned char save_file(const char*name,const void* buffer, unsigned int size,unsigned char device);
   
   // ------------------------------------------------------------------------
   // * load_file(const char*name, const void* buffer, unsigned char device) *
@@ -1028,6 +1043,10 @@
   // -----------------------------------------------
   void hm_set_buffer_map(unsigned char px,unsigned char py,unsigned char value);
   
+	
+	unsigned char hm_get_id_tiles(unsigned char px,unsigned char py);
+	void hm_draw_meta_tiles(unsigned char px,unsigned char py);
+	
   // ------------------------------------
   // * Modifier les datas des meta tile *
   // ------------------------------------

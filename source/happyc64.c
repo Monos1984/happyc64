@@ -42,6 +42,16 @@ const unsigned int adr_case[]=
 };
 
 
+// ===========================================
+// ** Initiation memoire video mode Happy C **
+// ===========================================
+void init_vic_hpc()
+{
+  set_vic_bank(VIC_BANK_3); // VicII en $C000
+  set_adresse_screen_memory(SM_2000); // Screen Memory en $E000
+  set_location_character(10); // Pointeurs de tiles en $E800 
+}
+
 // ====================
 // ** NTSC(0)/PAL(1) **
 // ====================
