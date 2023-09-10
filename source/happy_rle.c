@@ -3,7 +3,7 @@
   **********************************************************
   * Role ........... : Gestion du cryptage RLE             *
   * Auteur ......... : Jean Monos                          *
-  * Modification ... : 13/03/2021                          *
+  * Modification ... : 10/09/2023                          *
   * Licence ........ : Creative Commons by-sa              *
   * Compilateur .... : cc65                                *
   **********************************************************/
@@ -13,7 +13,6 @@
 // ====================
 #include <happyc64.h>
 #include <string.h>
-
 // =====================
 // * Decompression RLE *
 // =====================
@@ -94,7 +93,7 @@ unsigned int rle_compression(unsigned int source,unsigned int destination,unsign
       // ---------------------------
       // * Incrementation du cycle *
       // ---------------------------
-    
+      offset_cible = offset_cible+2;
 
     
       // ----------------------------------------------
