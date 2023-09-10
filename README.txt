@@ -15,17 +15,31 @@ Ecrit par Loïc Lété (Jean Monos)
 ==============================
 * Changement de la librairie *
 ==============================
-mise à jour le 19/10/2022
+mise à jour le 14/02/2023
 
 ===============================================
 ============= Version 0.2.x.x =================
 ===============================================
 
 ===================================
+* Changement 0.2.5.0 (10/09/2023) *
+===================================
+* Non publier *
+
+- Correction de la fonction RLE
+- Ajout de la fonction hm_get_id_tiles(..) pour récuperer l'id tiles du buffer map.
+- Ajout de la fonction hm_draw_meta_tiles(.....) 
+- Ajout de la fonction wait_key_release();
+- Changement de prototype dans le draw_texte pour passer de unsigned char * en char* pour les chaines.
+- Correction de divers "cast" dans le module texte et D7.
+- correction dans le generateur aléatoire. On passe avec le Srand de la lib.
+
+===================================
 * Changement 0.2.4.1 (19/10/2022) *
 ===================================
 - Amélioration de la fonction draw_text_value_8(...).
 - Amélioration de la fonction draw_text_value_16(...).
+
 ===================================
 * Changement 0.2.4.0 (21/09/2022) *
 ===================================
@@ -37,7 +51,6 @@ mise à jour le 19/10/2022
 - Ajout du dossier cartridge qui contient deux fichier cfg, deux fichier objet 
 - Ajout du logiciel mcart.exe recompilé pour fonctionner sur un os windows64bits.
  
-
 ======================
 * Changement 0.2.3.5 *
 ======================
@@ -117,7 +130,6 @@ Ajout de trois fonction pour tester un bit dans un octet.
 - Ajout de la fonction wait_key();
 - Les define du joystick débute maintenant par un J_
 
-
 ======================
 * Changement 0.1.1.0 *
 ======================
@@ -129,12 +141,12 @@ Ajout de trois fonction pour tester un bit dans un octet.
 ======================
 Grosse modification des noms de fonctions.
 
--load_pattern devient set_data_character()
--draw_full_charset devient draw_full_character
--draw_charset devient draw_character
--draw_charsetligne_v (et h) passe en draw_character...
-(note le terme charset est remplacé par character)
--set_pointeurs_sprites devient set sprite pointers
+- load_pattern devient set_data_character()
+- draw_full_charset devient draw_full_character
+- draw_charset devient draw_character
+- draw_charsetligne_v (et h) passe en draw_character...
+ (note le terme charset est remplacé par character)
+- set_pointeurs_sprites devient set sprite pointers
 - draw_valeur_8 (et 16) devient draw_text_value_8 (et 16)
 - set_pointeur_text devient set_text_pointer()
 - activation de get_adresse_screen_memory
@@ -159,7 +171,6 @@ Grosse modification des noms de fonctions.
 ----------------------
 - Ajout de la fonction draw_charset_line_H() et draw_charset_line_V()
 - Ajout de la fonction cls_color_map()
-
 
 ----------------------
 * Changement 0.0.7.0 *
